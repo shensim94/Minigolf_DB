@@ -1,0 +1,103 @@
+<head>
+    <title>MiniGolf Fanatics</title>
+    <h1>Clubs</h1>
+
+    [ <a href="players.html">Players</a> | <a href="clubs.html">Clubs</a> | <a href="holes.html">Holes</a> | <a
+        href="hole_scores.html">hole scores</a> | <a href="club_members.html">club members</a>]
+    <p>&nbsp;</p>
+    <div id="browse">
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>description</th>
+                <th>address</th>
+                <th>zip_code</th>
+                <th>city</th>
+                <th>state</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Happy Land</td>
+                <td>Course filled with all your childhood dreams</td>
+                <td>1436 Subway Ave.</td>
+                <td>37456</td>
+                <td>Greenvile</td>
+                <td>GA</td>
+                <td><button type="button">EDIT</button></td>
+                <td><button type="button">DELETE</button></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Gator Land</td>
+                <td>Where Chub lost his hand</td>
+                <td>245 4th St.</td>
+                <td>37456</td>
+                <td>Greenvile</td>
+                <td>GA</td>
+                <td><button type="button">EDIT</button></td>
+                <td><button type="button">DELETE</button></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Ole Country Club</td>
+                <td>A popular gathering place for the pompous and self absorbed</td>
+                <td>420 Magnolia Ave.</td>
+                <td>36532</td>
+                <td>Springfield</td>
+                <td>GA</td>
+                <td><button type="button">EDIT</button></td>
+                <td><button type="button">DELETE</button></td>
+            </tr>
+        </table>
+    </div>
+    <p>&nbsp;</p>
+    <div id="insert">
+        <form method="POST" id="add club">
+            <table border="1" cellpadding="5">
+                <tr>
+                    <th>name</th>
+                    <th>description</th>
+                    <th>address</th>
+                    <th>zip_code</th>
+                    <th>city</th>
+                    <th>state</th>
+                </tr>
+                <tr>
+                    <td><input type="text" name="name"></td>
+                    <td><input type="text" name="description"></td>
+                    <td><input type="text" name="address"></td>
+                    <td><input type="text" name="zip_code"></td>
+                    <td><input type="text" name="city"></td>
+                    <td><input type="text" name="state"></td>
+                </tr>
+            </table>
+            <input class="btn" type="submit" value="add club">
+        </form>
+    </div><!-- insert -->
+    <p>&nbsp;</p>
+    <div id="update">
+        <form method="POST" id="update club">
+            <table border="1" cellpadding="5">
+                <tr>
+                    <th>name</th>
+                    <th>description</th>
+                    <th>address</th>
+                    <th>zip_code</th>
+                    <th>city</th>
+                    <th>state</th>
+                </tr>
+                <tr>
+                    <td><input type="text" name="name" value="Happy Land"></td>
+                    <td><input type="text" name="description"></td>
+                    <td><input type="text" name="address"></td>
+                    <td><input type="text" name="zip_code"></td>
+                    <td><input type="text" name="city"></td>
+                    <td><input type="text" name="state"></td>
+                </tr>
+            </table>
+            <input class="btn" type="submit" value="update club">
+        </form>
+    </div><!-- insert -->

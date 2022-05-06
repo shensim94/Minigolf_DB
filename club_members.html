@@ -1,0 +1,45 @@
+<head>
+    <title>MiniGolf Fanatics</title>
+</head>
+
+<body>
+    [ <a href="players.html">Players</a> | <a href="clubs.html">Clubs</a> | <a href="holes.html">Holes</a> | <a
+        href="hole_scores.html">hole scores</a> | <a href="club_members.html">club members</a>]
+    <h1>club members</h1>
+    <div id="browse">
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>player_id</th>
+                <th>club_id</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>1</td>
+                <td><button type="button">DELETE</button></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>2</td>
+                <td><button type="button">DELETE</button></td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>3</td>
+                <td><button type="button">DELETE</button></td>
+            </tr>
+        </table>
+    </div>
+    <p>&nbsp;</p>
+    <div id="insert">
+        <form method="POST" id="addmembership">
+            <legend><strong>Add New Membership</strong></legend>
+            <fieldset class="fields">
+                <label> player_id</label> <input type="number">
+                <label> club_id </label> <input type="number">
+            </fieldset>
+            <input class="btn" type="submit" id="addPerson" value="Add new membership">
+        </form>
+    </div><!-- insert -->
+
+</body>

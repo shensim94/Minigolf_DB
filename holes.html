@@ -1,0 +1,90 @@
+<head>
+<title>MiniGolf Fanatics</title>
+<h1>Holes</h1>
+
+[ <a href="players.html">Players</a> | <a href="clubs.html">Clubs</a> | <a href="holes.html">Holes</a> | <a href="hole_scores.html">hole scores</a> | <a href="club_members.html">club members</a>]
+<p>&nbsp;</p>
+<div id="browse">
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>club_id</th>
+            <th>hole_number</th>
+            <th>par_score</th>
+            <th>description</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>3</td>
+            <td>Happy Land: first hole</td>
+            <td><button type="button">EDIT</button></td>
+            <td><button type="button">DELETE</button></td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>Happy Land: second hole</td>
+            <td><button type="button">EDIT</button></td>
+            <td><button type="button">DELETE</button></td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>3</td>
+            <td>3</td>
+            <td>Happy Land: third hole</td>
+            <td><button type="button">EDIT</button></td>
+            <td><button type="button">DELETE</button></td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>4</td>
+            <td>3</td>
+            <td>Happy Land: fourth hole</td>
+            <td><button type="button">EDIT</button></td>
+            <td><button type="button">DELETE</button></td>
+        </tr>
+    </table>
+</div>
+<p>&nbsp;</p>
+<div id="insert">
+    <form method="POST" id="addscore">
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>club_id</th>
+                <th>hole_number</th>
+                <th>par_score</th>
+                <th>description</th>
+            </tr>
+            <tr>
+                <td><input type="number" name="club_id"></td>
+                <td><input type="number" name="hole_number"></td>
+                <td><input type="number" name="par_score"></td>
+                <td><input type="text" name="description"></td>
+            </tr>
+        </table>
+        <input class="btn" type="submit" value="add hole">
+    </form>
+  </div><!-- insert -->
+  <p>&nbsp;</p>
+  <div id="update">
+    <form method="POST" id="update hole">
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>club_id</th>
+                <th>hole_number</th>
+                <th>par_score</th>
+                <th>description</th>
+            </tr>
+            <tr>
+                <td><input type="number" name="club_id" value="1"></td>
+                <td><input type="number" name="hole_number" value="1"></td>
+                <td><input type="number" name="par_score" value="3"></td>
+                <td><input type="text" name="description" value="Happy Land: first hole"></td>
+            </tr>
+        </table>
+        <input class="btn" type="submit" value="update hole">
+    </form>
+  </div><!-- insert -->

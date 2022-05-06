@@ -1,0 +1,126 @@
+<head>
+<title>MiniGolf Fanatics</title>
+<h1>hole_scores</h1>
+
+[ <a href="players.html">Players</a> | <a href="clubs.html">Clubs</a> | <a href="holes.html">Holes</a> | <a href="hole_scores.html">hole scores</a> | <a href="club_members.html">club members</a>]
+<p>&nbsp;</p>
+<div id="browse">
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>date</th>
+            <th>player_id</th>
+            <th>club_id</th>
+            <th>hole_number</th>
+            <th>score</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>2022-04-28</td>
+            <td>1</td>
+            <td>2</td>
+            <td>1</td>
+            <td>3</td>
+            <td><button type="button">EDIT</button></td>
+            <td><button type="button">DELETE</button></td>
+        </tr>
+        <tr>
+            <td>2022-04-28</td>
+            <td>1</td>
+            <td>2</td>
+            <td>2</td>
+            <td>3</td>
+            <td><button type="button">EDIT</button></td>
+            <td><button type="button">DELETE</button></td>
+        </tr>
+        <tr>
+            <td>2022-04-28</td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>2</td>
+            <td><button type="button">EDIT</button></td>
+            <td><button type="button">DELETE</button></td>
+        </tr>
+        <tr>
+            <td>2022-04-28</td>
+            <td>2</td>
+            <td>2</td>
+            <td>1</td>
+            <td>2</td>
+            <td><button type="button">EDIT</button></td>
+            <td><button type="button">DELETE</button></td>
+        </tr>
+        <tr>
+            <td>2022-04-28</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>4</td>
+            <td><button type="button">EDIT</button></td>
+            <td><button type="button">DELETE</button></td>
+        </tr>
+        <tr>
+            <td>2022-04-28</td>
+            <td>2</td>
+            <td>2</td>
+            <td>3</td>
+            <td>3</td>
+            <td><button type="button">EDIT</button></td>
+            <td><button type="button">DELETE</button></td>
+        </tr>
+        <tr>
+            <td>2022-04-28</td>
+            <td>2</td>
+            <td>2</td>
+            <td>4</td>
+            <td>5</td>
+            <td><button type="button">EDIT</button></td>
+            <td><button type="button">DELETE</button></td>
+        </tr>
+    </table>
+</div>
+<p>&nbsp;</p>
+<div id="insert">
+    <form method="POST" id="addscore">
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>date</th>
+                <th>player_id</th>
+                <th>club_id</th>
+                <th>hole_number</th>
+                <th>score</th>
+            </tr>
+            <tr>
+                <td><input type="date" name="date"></td>
+                <td><input type="number" name="player_id"></td>
+                <td><input type="number" name="club_id"></td>
+                <td><input type="number" name="hole_number"></td>
+                <td><input type="number" name="score"></td>
+            </tr>
+        </table>
+        <input class="btn" type="submit" value="add score">
+    </form>
+  </div><!-- insert -->
+  <p>&nbsp;</p>
+  <div id="update">
+    <form method="POST" id="updatescore">
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>date</th>
+                <th>player_id</th>
+                <th>club_id</th>
+                <th>hole_number</th>
+                <th>score</th>
+            </tr>
+            <tr>
+                <td><input type="date" name="date" value = "2022-04-28"></td>
+                <td><input type="number" name="player_id" value="1"></td>
+                <td><input type="number" name="club_id" value="2"></td>
+                <td><input type="number" name="hole_number" value="1"></td>
+                <td><input type="number" name="score" value="3"></td>
+            </tr>
+        </table>
+        <input class="btn" type="submit" value="update score">
+    </form>
+  </div><!-- insert -->
