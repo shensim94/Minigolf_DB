@@ -8,7 +8,8 @@ SELECT * FROM club_members ORDER BY player_id ASC;
 SELECT * FROM holes ORDER BY course_id ASC;
 
 --Query for all hole_scores
-SELECT * FROM hole_scores ORDER BY player_ID ASC, score ASC;
+--best score at top
+SELECT * FROM hole_scores ORDER BY player_id ASC, score ASC;
 
 --Insert player
 INSERT INTO players
@@ -29,8 +30,20 @@ VALUES
 );
 
 --Delete player
- 
+ DELETE from players WHERE player_id = :player_id_from_select;
+
 --Update player
+--updating all fields, as they will be passed in
+--even if they have not changed.
+UPDATE players
+SET
+name=:name_input,
+address=:address_input,
+zip_code=:zip_input,
+city=:city_input,
+state=:state_input 
+WHERE player_id = :player_id_from_select;
+
 
 --Insert club_members
 INSERT INTO club_members
@@ -45,6 +58,8 @@ VALUES
 );
 
 --Delete club_members
+--should only delete a single membership.
+DELETE from club_members WHERE player_id = :player_id_from_select AND course_id= :course_id_from_select;
 
 --(Not including update as we'd only add or remove.)
 
@@ -70,8 +85,21 @@ VALUES
 --'next_hole' button that might increment some variable.
 
 --Delete hole_scores
+DELETE FROM hole_scores WHERE date = :selected_date AND player_id = :player_id_from_select
+AND course_id = :course_id_from_select AND hole_number = :hole_number_from_select;
 
 --Update hole_scores
+--updating a hole score may change its identifier.
+--additionally, 
+UPDATE hole_scores
+SET
+date = :new_date,
+player_id = :new_id,
+course_id = :new_course_id,
+hole_number = :new_hole_number,
+score = :new_score
+WHERE (date = :selected_date AND player_id = :player_id_from_select
+AND course_id = :course_id_from_select AND hole_number = :hole_number_from_select);
 
 --Insert holes
 INSERT INTO holes
@@ -93,8 +121,17 @@ VALUES
 --written to verify that the user is not inserting duplicate holes, skipping holes, etc.
 
 --Delete holes
+DELETE FROM holes WHERE hole_number = :hole_number_from_select AND course_id = :course_id_from_select;
 
 --Update holes
+UPDATE holes
+SET
+hole_number= :new_hole_number,
+course_id = :new_course_id,
+par_score = :new_par_score,
+description = :new_description
+WHERE course_id = :course_id_from_select AND hole_number = :hole_number_from_select;
+
 
 --Insert clubs
 INSERT INTO clubs
@@ -117,5 +154,15 @@ VALUES
 );
 
 --Delete clubs
+DELETE FROM clubs WHERE course_id = :course_id_from_select;
 
 --Update clubs
+UPDATE clubs
+SET
+name = :new_name,
+description = :new_description,
+address = :new_address,
+zip_code = :new_zip,
+city = :new_city,
+state = :new_state
+WHERE course_id = :course_id_from_select;
