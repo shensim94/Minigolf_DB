@@ -71,8 +71,8 @@
                 <td>37456</td>
                 <td>Greenvile</td>
                 <td>GA</td>
-                <td><button type="button">EDIT</button></td>
-                <td><button type="button">DELETE</button></td>
+                <td><button type="button" onclick = 'updateClub()'>EDIT</button></td>
+                <td><button type="button" onclick = 'deleteClub()'>DELETE</button></td>
             </tr>
             <tr>
                 <td>2</td>
@@ -82,8 +82,8 @@
                 <td>37456</td>
                 <td>Greenvile</td>
                 <td>GA</td>
-                <td><button type="button">EDIT</button></td>
-                <td><button type="button">DELETE</button></td>
+                <td><button type="button" onclick = 'updateClub()'>EDIT</button></td>
+                <td><button type="button" onclick = 'deleteClub()'>DELETE</button></td>
             </tr>
             <tr>
                 <td>3</td>
@@ -93,10 +93,11 @@
                 <td>36532</td>
                 <td>Springfield</td>
                 <td>GA</td>
-                <td><button type="button">EDIT</button></td>
-                <td><button type="button">DELETE</button></td>
+                <td><button type="button" onclick = 'updateClub()'>EDIT</button></td>
+                <td><button type="button" onclick = 'deleteClub()'>DELETE</button></td>
             </tr>
         </table>
+        <button type="button" onclick="newClub()">ADD</button>
     </div>
     <p>&nbsp;</p>
     <div id="insert">
@@ -146,4 +147,5 @@
             <input class="btn" type="submit" value="update club">
         </form>
     </div><!-- insert -->
+    
 </body>

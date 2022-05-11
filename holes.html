@@ -1,5 +1,49 @@
 <head>
 <title>MiniGolf Fanatics</title>
+<script language="JavaScript">
+    function showform(dowhat) {
+      /*
+      * four DIVS: browse, insert, update, delete
+      * this function sets one visible the others not
+      */
+      if (dowhat == 'insert') {
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'block';
+        document.getElementById('update').style.display = 'none';
+        document.getElementById('delete').style.display = 'none';
+      }
+      else if (dowhat == 'update') {
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'block';
+        document.getElementById('delete').style.display = 'none';
+      }
+      else if (dowhat == 'delete') {
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'none';
+        document.getElementById('delete').style.display = 'block';
+      }
+      else if (dowhat == 'all') {
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'block';
+        document.getElementById('update').style.display = 'block';
+        document.getElementById('delete').style.display = 'block';
+      }
+      else { //by default display browse
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'none';
+        document.getElementById('delete').style.display = 'none';
+      }
+    }
+    function newHole() { showform('insert'); }
+    function updateHole() { showform('update'); }
+    function deleteHole() { showform('delete'); }
+    function browseHoles() { showform('browse'); }
+  </script>
+</head>
+<body onload = "browseHoles()">
 
 [ <a href="players.html">Players</a> | <a href="clubs.html">Clubs</a> | <a href="holes.html">Holes</a> | <a href="hole_scores.html">Hole Scores</a> | <a href="club_members.html">Club Members</a>]
 <p>&nbsp;</p>
@@ -20,35 +64,37 @@ Add, edit, or remove a hole.<br>
             <td>1</td>
             <td>3</td>
             <td>Happy Land: first hole</td>
-            <td><button type="button">EDIT</button></td>
-            <td><button type="button">DELETE</button></td>
+            <td><button type="button" onclick = "updateHole()">EDIT</button></td>
+            <td><button type="button" onclick = "deleteHole()">DELETE</button></td>
         </tr>
         <tr>
             <td>1</td>
             <td>2</td>
             <td>3</td>
             <td>Happy Land: second hole</td>
-            <td><button type="button">EDIT</button></td>
-            <td><button type="button">DELETE</button></td>
+            <td><button type="button" onclick = "updateHole()">EDIT</button></td>
+            <td><button type="button" onclick = "deleteHole()">DELETE</button></td>
         </tr>
         <tr>
             <td>1</td>
             <td>3</td>
             <td>3</td>
             <td>Happy Land: third hole</td>
-            <td><button type="button">EDIT</button></td>
-            <td><button type="button">DELETE</button></td>
+            <td><button type="button" onclick = "updateHole()">EDIT</button></td>
+            <td><button type="button" onclick = "deleteHole()">DELETE</button></td>
         </tr>
         <tr>
             <td>1</td>
             <td>4</td>
             <td>3</td>
             <td>Happy Land: fourth hole</td>
-            <td><button type="button">EDIT</button></td>
-            <td><button type="button">DELETE</button></td>
+            <td><button type="button" onclick = "updateHole()">EDIT</button></td>
+            <td><button type="button" onclick = "deleteHole()">DELETE</button></td>
         </tr>
     </table>
+    <button type="button" onclick="newHole()">ADD</button>
 </div>
+
 <p>&nbsp;</p>
 <div id="insert">
     <form method="POST" id="addscore">
@@ -89,3 +135,4 @@ Add, edit, or remove a hole.<br>
         <input class="btn" type="submit" value="update hole">
     </form>
   </div><!-- insert -->
+</body>
