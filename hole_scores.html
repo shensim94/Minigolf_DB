@@ -1,6 +1,49 @@
 <head>
 <title>MiniGolf Fanatics</title>
-
+<script language="JavaScript">
+    function showform(dowhat) {
+      /*
+      * four DIVS: browse, insert, update, delete
+      * this function sets one visible the others not
+      */
+      if (dowhat == 'insert') {
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'block';
+        document.getElementById('update').style.display = 'none';
+        document.getElementById('delete').style.display = 'none';
+      }
+      else if (dowhat == 'update') {
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'block';
+        document.getElementById('delete').style.display = 'none';
+      }
+      else if (dowhat == 'delete') {
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'none';
+        document.getElementById('delete').style.display = 'block';
+      }
+      else if (dowhat == 'all') {
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'block';
+        document.getElementById('update').style.display = 'block';
+        document.getElementById('delete').style.display = 'block';
+      }
+      else { //by default display browse
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'none';
+        document.getElementById('delete').style.display = 'none';
+      }
+    }
+    function newScore() { showform('insert'); }
+    function updateScore() { showform('update'); }
+    function deleteScore() { showform('delete'); }
+    function browseScores() { showform('browse'); }
+  </script>
+</head>
+<body onload="browseScores()">
 [ <a href="players.html">Players</a> | <a href="clubs.html">Clubs</a> | <a href="holes.html">Holes</a> | <a href="hole_scores.html">Hole scores</a> | <a href="club_members.html">Club Members</a>]
 <p>&nbsp;</p>
 <h1>Hole Scores</h1>
@@ -22,8 +65,8 @@ Add, edit, or remove a hole score.<br>
             <td>2</td>
             <td>1</td>
             <td>3</td>
-            <td><button type="button">EDIT</button></td>
-            <td><button type="button">DELETE</button></td>
+            <td><button type="button" onclick = 'updateScore()'>EDIT</button></td>
+            <td><button type="button" onclick = 'deleteScore()'>DELETE</button></td>
         </tr>
         <tr>
             <td>2022-04-28</td>
@@ -31,8 +74,8 @@ Add, edit, or remove a hole score.<br>
             <td>2</td>
             <td>2</td>
             <td>3</td>
-            <td><button type="button">EDIT</button></td>
-            <td><button type="button">DELETE</button></td>
+            <td><button type="button" onclick = 'updateScore()'>EDIT</button></td>
+            <td><button type="button" onclick = 'deleteScore()'>DELETE</button></td>
         </tr>
         <tr>
             <td>2022-04-28</td>
@@ -40,8 +83,8 @@ Add, edit, or remove a hole score.<br>
             <td>2</td>
             <td>3</td>
             <td>2</td>
-            <td><button type="button">EDIT</button></td>
-            <td><button type="button">DELETE</button></td>
+            <td><button type="button" onclick = 'updateScore()'>EDIT</button></td>
+            <td><button type="button" onclick = 'deleteScore()'>DELETE</button></td>
         </tr>
         <tr>
             <td>2022-04-28</td>
@@ -49,8 +92,8 @@ Add, edit, or remove a hole score.<br>
             <td>2</td>
             <td>1</td>
             <td>2</td>
-            <td><button type="button">EDIT</button></td>
-            <td><button type="button">DELETE</button></td>
+            <td><button type="button" onclick = 'updateScore()'>EDIT</button></td>
+            <td><button type="button" onclick = 'deleteScore()'>DELETE</button></td>
         </tr>
         <tr>
             <td>2022-04-28</td>
@@ -58,8 +101,8 @@ Add, edit, or remove a hole score.<br>
             <td>2</td>
             <td>2</td>
             <td>4</td>
-            <td><button type="button">EDIT</button></td>
-            <td><button type="button">DELETE</button></td>
+            <td><button type="button" onclick = 'updateScore()'>EDIT</button></td>
+            <td><button type="button" onclick = 'deleteScore()'>DELETE</button></td>
         </tr>
         <tr>
             <td>2022-04-28</td>
@@ -67,8 +110,8 @@ Add, edit, or remove a hole score.<br>
             <td>2</td>
             <td>3</td>
             <td>3</td>
-            <td><button type="button">EDIT</button></td>
-            <td><button type="button">DELETE</button></td>
+            <td><button type="button" onclick = 'updateScore()'>EDIT</button></td>
+            <td><button type="button" onclick = 'deleteScore()'>DELETE</button></td>
         </tr>
         <tr>
             <td>2022-04-28</td>
@@ -76,10 +119,11 @@ Add, edit, or remove a hole score.<br>
             <td>2</td>
             <td>4</td>
             <td>5</td>
-            <td><button type="button">EDIT</button></td>
-            <td><button type="button">DELETE</button></td>
+            <td><button type="button" onclick = 'updateScore()'>EDIT</button></td>
+            <td><button type="button" onclick = 'deleteScore()'>DELETE</button></td>
         </tr>
     </table>
+    <button type="button" onclick="newScore()">ADD</button>
 </div>
 <p>&nbsp;</p>
 <div id="insert">
@@ -125,3 +169,4 @@ Add, edit, or remove a hole score.<br>
         <input class="btn" type="submit" value="update score">
     </form>
   </div><!-- insert -->
+</body>
