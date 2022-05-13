@@ -49,12 +49,35 @@
 <p>&nbsp;</p>
 <h1>Holes</h1>
 Add, edit, or remove a hole.<br>
+</br>
+<div id="search hole">
+  <form method="GET" id="search hole">
+    <legend><strong>lookup holes</strong></legend>
+    <fieldset class="fields">
+      <table>
+        <tr>
+            <td><label> club id</label></td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+          <td><label> hole number</label></td>
+          <td><input type="text"></td>
+      </tr>
+      <tr>
+          <td><label> par score</label></td>
+          <td><input type="text"></td>
+      </tr>
+      <tr>
+    </table>
+    </fieldset>
+    <input class="btn" type="submit" id="search hole" value="search hole">
+  </form>
 <div id="browse">
     <table border="1" cellpadding="5">
         <tr>
-            <th>club_id</th>
-            <th>hole_number</th>
-            <th>par_score</th>
+            <th><button>club id</button></th>
+            <th><button>hole number</button></th>
+            <th><button>par score</button></th>
             <th>description</th>
             <th></th>
             <th></th>
