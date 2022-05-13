@@ -1,8 +1,13 @@
 --Query for all players
 SELECT * FROM players ORDER BY player_id ASC;
 
+--Query for all club_members
+SELECT club_members.player_id AS "Player ID", players.name AS "Name", club_members.course_id AS "Course ID", clubs.name AS "Club Name" FROM club_members 
+INNER JOIN players on players.player_id = club_members.player_id
+INNER JOIN clubs on clubs.course_id = club_members.course_id;
+
 --Query for all clubs
-SELECT * FROM club_members ORDER BY player_id ASC;
+SELECT * FROM clubs ORDER BY course_id ASC;
 
 --Query for all holes
 SELECT * FROM holes ORDER BY course_id ASC;
