@@ -48,14 +48,45 @@
 <p>&nbsp;</p>
 <h1>Hole Scores</h1>
 Add, edit, or remove a hole score.<br>
+</br>
+<div id="search score">
+  <form method="GET" id="search score">
+    <legend><strong>lookup scores</strong></legend>
+    <fieldset class="fields">
+      <table>
+        <tr>
+            <td><label> date</label></td>
+            <td><input type="date"></td>
+        </tr>
+        <tr>
+          <td><label> player id</label></td>
+          <td><input type="number"></td>
+      </tr>
+      <tr>
+          <td><label> club id</label></td>
+          <td><input type="number"></td>
+      </tr>
+      <tr>
+          <td><label>hole number</label></td>
+          <td><input type="number"></td>
+      </tr>
+      <tr>
+          <td><label> score</label></td>
+          <td><input type="number"></td>
+      </tr>
+    </table>
+    </fieldset>
+    <input class="btn" type="submit" id="search score" value="search score">
+  </form>
+</div><!-- insert -->
 <div id="browse">
     <table border="1" cellpadding="5">
         <tr>
-            <th>date</th>
-            <th>player_id</th>
-            <th>club_id</th>
-            <th>hole_number</th>
-            <th>score</th>
+            <th><button>date</button></th>
+            <th><button>player id</button></th>
+            <th><button>club id</button></th>
+            <th><button>hole number</button></th>
+            <th><button>score</button></th>
             <th></th>
             <th></th>
         </tr>
