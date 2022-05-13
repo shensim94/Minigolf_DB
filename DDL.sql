@@ -40,12 +40,13 @@ CREATE TABLE club_members(
 );
 
 CREATE TABLE hole_scores(
+    hole_scores_id int NOT NULL AUTO_INCREMENT,
     date DATE,
     player_id int NOT NULL,
     club_id int NOT NULL,
     hole_number int NOT NULL,
     score int NOT NULL,
-    PRIMARY KEY(date, player_id, club_id, hole_number),
+    PRIMARY KEY(hole_scores_id),
     FOREIGN KEY(player_id) REFERENCES players(player_id) ON DELETE CASCADE,
     constraint fk_hole_id FOREIGN KEY(club_id, hole_number) REFERENCES holes(club_id, hole_number) ON DELETE CASCADE
 );
