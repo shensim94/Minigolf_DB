@@ -52,16 +52,47 @@
     href="hole_scores.html">Hole Scores</a> | <a href="club_members.html">Club Members</a>]
   <h1>Players</h1>
   Add, Edit, or Delete Players.<br>
+</br>
+<div id="search player">
+  <form method="GET" id="search player">
+    <legend><strong>Search for a player</strong></legend>
+    <fieldset class="fields">
+      <table>
+        <tr>
+            <td><label> name</label></td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+          <td><label> address</label></td>
+          <td><input type="text"></td>
+      </tr>
+      <tr>
+          <td><label> zip_code</label></td>
+          <td><input type="text"></td>
+      </tr>
+      <tr>
+          <td><label> city</label></td>
+          <td><input type="text"></td>
+      </tr>
+      <tr>
+          <td><label> state</label></td>
+          <td><input type="text"></td>
+      </tr>
+    </table>
+    </fieldset>
+    <input class="btn" type="submit" id="search player" value="search player">
+  </form>
+</div><!-- insert -->
 
   <div id="browse">
     <table border="1" cellpadding="5">
       <tr>
         <th>id</th>
-        <th>name</th>
-        <th>address</th>
-        <th>zip_code</th>
-        <th>city</th>
-        <th>state</th>
+        <th><button>name</button></th>
+        <th><button>address</button></th>
+        <th><button>zip_code</button></th>
+        <th><button>city</button></th>
+        <th><button>state</button></th>
         <th></th>
         <th></th>
       </tr>
