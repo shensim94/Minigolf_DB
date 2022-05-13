@@ -1,6 +1,50 @@
 <head>
     <title>MiniGolf Fanatics</title>
+    <script language="JavaScript">
+        function showform(dowhat) {
+          /*
+          * four DIVS: browse, insert, update, delete
+          * this function sets one visible the others not
+          */
+          if (dowhat == 'insert') {
+            document.getElementById('browse').style.display = 'block';
+            document.getElementById('insert').style.display = 'block';
+            document.getElementById('update').style.display = 'none';
+            document.getElementById('delete').style.display = 'none';
+          }
+          else if (dowhat == 'update') {
+            document.getElementById('browse').style.display = 'block';
+            document.getElementById('insert').style.display = 'none';
+            document.getElementById('update').style.display = 'block';
+            document.getElementById('delete').style.display = 'none';
+          }
+          else if (dowhat == 'delete') {
+            document.getElementById('browse').style.display = 'block';
+            document.getElementById('insert').style.display = 'none';
+            document.getElementById('update').style.display = 'none';
+            document.getElementById('delete').style.display = 'block';
+          }
+          else if (dowhat == 'all') {
+            document.getElementById('browse').style.display = 'block';
+            document.getElementById('insert').style.display = 'block';
+            document.getElementById('update').style.display = 'block';
+            document.getElementById('delete').style.display = 'block';
+          }
+          else { //by default display browse
+            document.getElementById('browse').style.display = 'block';
+            document.getElementById('insert').style.display = 'none';
+            document.getElementById('update').style.display = 'none';
+            document.getElementById('delete').style.display = 'none';
+          }
+        }
+        function newClub() { showform('insert'); }
+        function updateClub() { showform('update'); }
+        function deleteClub() { showform('delete'); }
+        function browseClubs() { showform('browse'); }
+      </script>
+</head>
 
+<body onload="browseClubs()">
     [ <a href="players.html">Players</a> | <a href="clubs.html">Clubs</a> | <a href="holes.html">Holes</a> | <a
         href="hole_scores.html">Hole Scores</a> | <a href="club_members.html">Club Members</a>]
     <p>&nbsp;</p>
@@ -27,8 +71,8 @@
                 <td>37456</td>
                 <td>Greenvile</td>
                 <td>GA</td>
-                <td><button type="button">EDIT</button></td>
-                <td><button type="button">DELETE</button></td>
+                <td><button type="button" onclick = 'updateClub()'>EDIT</button></td>
+                <td><button type="button" onclick = 'deleteClub()'>DELETE</button></td>
             </tr>
             <tr>
                 <td>2</td>
@@ -38,8 +82,8 @@
                 <td>37456</td>
                 <td>Greenvile</td>
                 <td>GA</td>
-                <td><button type="button">EDIT</button></td>
-                <td><button type="button">DELETE</button></td>
+                <td><button type="button" onclick = 'updateClub()'>EDIT</button></td>
+                <td><button type="button" onclick = 'deleteClub()'>DELETE</button></td>
             </tr>
             <tr>
                 <td>3</td>
@@ -49,10 +93,11 @@
                 <td>36532</td>
                 <td>Springfield</td>
                 <td>GA</td>
-                <td><button type="button">EDIT</button></td>
-                <td><button type="button">DELETE</button></td>
+                <td><button type="button" onclick = 'updateClub()'>EDIT</button></td>
+                <td><button type="button" onclick = 'deleteClub()'>DELETE</button></td>
             </tr>
         </table>
+        <button type="button" onclick="newClub()">ADD</button>
     </div>
     <p>&nbsp;</p>
     <div id="insert">
@@ -102,3 +147,5 @@
             <input class="btn" type="submit" value="update club">
         </form>
     </div><!-- insert -->
+    
+</body>
