@@ -4,7 +4,7 @@
 // Express
 var express = require('express');   // We are using the express library for the web server
 var app     = express();            // We need to instantiate an express object to interact with the server in our code
-PORT        = 9234;                 // Set a port number at the top so it's easy to change in the future
+PORT        = 9233;                 // Set a port number at the top so it's easy to change in the future
 
 // Database
 var db = require('./db-connector')
@@ -20,7 +20,7 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
 */
 app.get('/', function(req, res)
     {
-        res.send('index');
+        res.render('index');
     });
 
 /*
