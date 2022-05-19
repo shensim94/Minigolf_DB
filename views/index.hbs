@@ -1,3 +1,59 @@
 <!-- index.hbs -->
+<!-- index.hbs -->
 <h1>The server is running!</h1>
 <p>If you see this text, the server is <strong>definitely</strong> working!</p>
+
+<body>
+    [ <a href="players.html">Players</a> | <a href="clubs.html">Clubs</a> | <a href="holes.html">Holes</a> | <a
+        href="hole_scores.html">Hole Scores</a> | <a href="club_members.html">Club Members</a>]
+    <h1>Club Members</h1>
+    Add or remove memberships.<br>
+    <div id="browse">
+    <table id = "club_members_table" border="1" cellpadding="5">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.Player_ID}}</td>
+            <td>{{this.Name}}</td>
+            <td>{{this.Club_ID}}</td>
+            <td>{{this.Club_Name}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+    </div>
+    <p>&nbsp;</p>
+    <div id="insert">
+        <form method="POST" id="addmembership">
+            <legend><strong>Add New Membership</strong></legend>
+            <fieldset class="fields">
+                <label for="input_player_id"> player_id</label> 
+                <input type="number" name="input_player_id" id="input_player_id">
+                
+                <label> club_id </label> 
+                <input type="number" name="input_club_id" id="input_club_id">
+            </fieldset>
+            <input class="btn" type="submit" value="Add new membership">
+        </form>
+    </div><!-- insert -->
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_club_member.js"></script>
+</body>
