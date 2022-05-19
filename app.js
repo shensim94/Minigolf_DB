@@ -20,7 +20,7 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
 /*
     ROUTES
 */
-app.post('/add-person-ajax', function(req, res) 
+app.post('/addmembership', function(req, res) 
 {
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
@@ -52,7 +52,7 @@ app.post('/add-person-ajax', function(req, res)
         else
         {
             // If there was no error, perform a SELECT * on bsg_people
-            let query1 = "SELECT club_members.player_id AS 'Player_ID', players.name AS 'Name', club_members.club_id AS 'Club_ID', clubs.name AS 'Club_Name' FROM club_members INNER JOIN players on players.player_id = club_members.player_id INNER JOIN clubs on clubs.club_id = club_members.club_id; ";               // Define our query
+            let query2 = "SELECT club_members.player_id AS 'Player_ID', players.name AS 'Name', club_members.club_id AS 'Club_ID', clubs.name AS 'Club_Name' FROM club_members INNER JOIN players on players.player_id = club_members.player_id INNER JOIN clubs on clubs.club_id = club_members.club_id; ";               // Define our query
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400
@@ -71,7 +71,8 @@ app.post('/add-person-ajax', function(req, res)
         }
     })
 });
-/*app.get('/', function(req, res)
+
+app.get('/', function(req, res)
     {  
         let query1 = "SELECT club_members.player_id AS 'Player_ID', players.name AS 'Name', club_members.club_id AS 'Club_ID', clubs.name AS 'Club_Name' FROM club_members INNER JOIN players on players.player_id = club_members.player_id INNER JOIN clubs on clubs.club_id = club_members.club_id; ";               // Define our query
         //let query1 = "SELECT * from club_members;"
@@ -80,7 +81,7 @@ app.post('/add-person-ajax', function(req, res)
             res.render('index', {data: rows});                  // Render the index.hbs file, and also send the renderer
         })                                                      // an object where 'data' is equal to the 'rows' we
     });                                                         // received back from the query
-*/
+
 /*
     LISTENER
 */
