@@ -26,16 +26,16 @@ app.post('/addmembership', function(req, res)
     let data = req.body;
 
     // Capture NULL values
-    let homeworld = parseInt(data.homeworld);
-    if (isNaN(homeworld))
+    let player_id = parseInt(data.player_id);
+    if (isNaN(player_id))
     {
-        homeworld = 'NULL'
+        res.send(400)
     }
 
-    let age = parseInt(data.age);
-    if (isNaN(age))
+    let club_id = parseInt(data.club_id);
+    if (isNaN(club_id))
     {
-        age = 'NULL'
+        res.send(400)
     }
 
     // Create the query and run it on the database
