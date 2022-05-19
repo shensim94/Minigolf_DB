@@ -1,13 +1,22 @@
 {
-  "name": "task1",
+  "name": "cs340-webapp",
   "version": "1.0.0",
-  "description": "",
+  "description": "repo containing html and js files for cs340 final project",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
-  "author": "Allan Hillyer",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/athillyerschool/cs340-webapp.git"
+  },
+  "author": "Allan Hillyer, Simon Shen",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/athillyerschool/cs340-webapp/issues"
+  },
+  "homepage": "https://github.com/athillyerschool/cs340-webapp#readme",
   "dependencies": {
     "express": "^4.18.1",
     "express-handlebars": "^6.0.6",

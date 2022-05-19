@@ -1,13 +1,14 @@
 /*
     SETUP
 */
+
 // Express
-var express = require('express');   // We are using the express library for the web server
-var app     = express();            // We need to instantiate an express object to interact with the server in our code
-PORT        = 9233;                 // Set a port number at the top so it's easy to change in the future
+var express = require('express');
+var app = express();
+PORT = 9233;
 
 // Database
-var db = require('./db-connector')
+var db = require('./database/db-connector');
 
 // Handlebars
 const { engine } = require('express-handlebars');
@@ -19,13 +20,13 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
     ROUTES
 */
 app.get('/', function(req, res)
-    {
-        res.render('index');
-    });
+{
+    res.render('index')
+});
 
 /*
     LISTENER
 */
-app.listen(PORT, function(){            // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
+app.listen(PORT, function(){
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
 });
