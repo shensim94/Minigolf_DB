@@ -41,9 +41,8 @@ addPersonForm.addEventListener("submit", function (e) {
 
             // Clear the input fields for another transaction
             player_id.value = '';
-            //player_name.value = '';
             club_id.value = '';
-            //club_name.value = '';
+            history.go(0);
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -76,20 +75,26 @@ addRowToTable = (data) => {
     let nameCell = document.createElement("TD");
     let clubIdCell = document.createElement("TD");
     let clubNameCell = document.createElement("TD");
+    let deleteCell = document.createElement("TD");
   
-
     // Fill the cells with correct data
     idCell.innerText = newRow.Player_ID;
     nameCell.innerText = newRow.Name;
     clubIdCell.innerText = newRow.Club_ID;
     clubNameCell.innerText = newRow.Club_Name;
-
+    
+    deleteCell = document.createElement("button");
+    deleteCell.innerHTML = "Delete";
+    deleteCell.onclick = function(){
+        deletePerson(newRow.Player_ID, newRow.Club_ID);
+    };
 
     // Add the cells to the row 
     row.appendChild(idCell);
     row.appendChild(nameCell);
     row.appendChild(clubIdCell);
     row.appendChild(clubNameCell);
+    row.appendChild(deleteCell);
 
     // Add the row to the table
     currentTable.appendChild(row);

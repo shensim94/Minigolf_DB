@@ -39,6 +39,8 @@
 </table>
 <script src="./js/delete_club_member.js"></script>
     </div>
+    <!-- insert -->
+    {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
     <p>&nbsp;</p>
     <div id="insert">
         <form id="addmembership">
@@ -52,7 +54,36 @@
             </fieldset>
             <input class="btn" type="submit" value="Add new membership">
         </form>
-    </div><!-- insert -->
-{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./js/add_club_member.js"></script>
+    </div>
+    <script src="./js/add_club_member.js"></script>
+    <p>&nbsp;</p>
+
+<form id="update-club-member">
+<legend><strong>Update Existing Membership</strong></legend>
+    <label for="input-name">Name:</label>
+    <select name="input-name" id="mySelect">
+        <option value="test">Select a Person</option>
+        {{#each names}}
+        <option value="{{this.Player_ID}}">{{this.Name}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-original-membership">Original Membership:</label>
+    <select name="input-original-membership" id="input-original-membership">
+        <option>Select original membership:</option>
+        {{#each data}}
+        <option value="{{this.Club_ID}}">{{this.Club_Name}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-new-membership">New Membership: </label>
+    <select name="input-new-membership" id="input-new-membership">
+        <option>Select new membership:</option>
+        {{#each clubs}}
+        <option value="{{this.club_id}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+    <input type="submit">
+</form>
+<script src="./js/update_club_member.js"></script>
 </body>

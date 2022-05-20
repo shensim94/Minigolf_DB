@@ -29,4 +29,5 @@ function deleteRow(player_id, club_id) {
             break;
         }
     }
+    history.go(0);
 }
