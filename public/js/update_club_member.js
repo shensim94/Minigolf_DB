@@ -1,3 +1,6 @@
+//Code adapted from:
+//https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
+
 // Get the objects we need to modify
 let updatePersonForm = document.getElementById('update-club-member');
 
@@ -30,6 +33,7 @@ updatePersonForm.addEventListener("submit", function (e) {
 
             // // Add the new data to the table
             // updateRow(xhttp.response, fullNameValue);
+            //probably not the ideal way of doing things, but I just refresh the page instead of updating a row
             history.go(0);
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -42,6 +46,7 @@ updatePersonForm.addEventListener("submit", function (e) {
 
 })
 
+//I didn't utilize this as I just ended up refreshing the page.
 function updateRow(data, personID){
     let parsedData = JSON.parse(data);
     

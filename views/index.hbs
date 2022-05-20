@@ -45,14 +45,20 @@
     <div id="insert">
         <form id="addmembership">
             <legend><strong>Add New Membership</strong></legend>
-            <fieldset class="fields">
-                <label for="input_player_id"> player_id</label> 
-                <input type="number" name="input_player_id" id="input_player_id">
-                
-                <label> club_id </label> 
-                <input type="number" name="input_club_id" id="input_club_id">
-            </fieldset>
-            <input class="btn" type="submit" value="Add new membership">
+            <select name="input_player_id" id="input_player_id">
+             <option value="test">Select a Person</option>
+             {{#each players}}
+             <option value="{{this.player_id}}">{{this.name}}</option>
+             {{/each}}
+            </select>
+
+            <select name="input_club_id" id="input_club_id">
+            <option value="test">Select a Club</option>
+            {{#each clubs}}
+            <option value="{{this.club_id}}">{{this.name}}</option>
+            {{/each}}
+            </select>
+        <input type="submit">
         </form>
     </div>
     <script src="./js/add_club_member.js"></script>

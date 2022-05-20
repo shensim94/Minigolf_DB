@@ -1,3 +1,4 @@
+//adapted from: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
 // Get the objects we need to modify
 let addPersonForm = document.getElementById('addmembership');
 
@@ -39,9 +40,7 @@ addPersonForm.addEventListener("submit", function (e) {
             // Add the new data to the table
             addRowToTable(xhttp.response);
 
-            // Clear the input fields for another transaction
-            player_id.value = '';
-            club_id.value = '';
+            //refresh the page to fix delete button wonkiness
             history.go(0);
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {

@@ -1,3 +1,6 @@
+//Authors: Allan Hillyer and Simon Shen
+//Code adapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app
+
 /*
     SETUP
 */
@@ -75,6 +78,7 @@ app.delete('/delete-club-member', function (req, res, next) {
             res.sendStatus(400);
         } else 
         {
+            //204-> no content code
             res.sendStatus(204);
         }
     })
@@ -86,6 +90,10 @@ app.put('/update-club-member', function(req,res,next)
     let person = parseInt(data.name);
     let originID = parseInt(data.originID);
     let newID = parseInt(data.newID);
+    if(!person || !originID || !newID)
+    {
+        res.sendStatus(400);
+    }
 
     let query = `UPDATE club_members SET club_id = ${newID} WHERE club_id = ${originID} AND player_id = ${person};`
     db.pool.query(query, function(error, fields){
@@ -147,7 +155,19 @@ function refresh(req, res)
                         }
                         else
                         {
-                            res.render('index', { data: rows, clubs: clubs, names:names });
+                            let query4 = "SELECT player_id, name FROM players;";
+                            db.pool.query(query4, function(error, players, fields){
+                                if(error)
+                                {
+                                    console.log(error);
+                                    res.sendStatus(400);
+                                }
+                                else
+                                {
+                                    res.render('index', { data: rows, clubs: clubs, names:names, players: players });
+                                }
+                            })
+
                         }
                     })
                 }
