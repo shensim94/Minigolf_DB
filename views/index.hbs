@@ -1,4 +1,5 @@
 <!-- index.hbs -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <body>
     [ <a href="players.html">Players</a> | <a href="clubs.html">Clubs</a> | <a href="holes.html">Holes</a> | <a
         href="hole_scores.html">Hole Scores</a> | <a href="club_members.html">Club Members</a>]
@@ -26,15 +27,17 @@
 
         {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
         {{#each data}}
-        <tr>
+        <tr data-p={{this.Player_ID}} data-c={{this.Club_ID}}>
             <td>{{this.Player_ID}}</td>
             <td>{{this.Name}}</td>
             <td>{{this.Club_ID}}</td>
             <td>{{this.Club_Name}}</td>
+            <td><button onclick="deletePerson({{this.Player_ID}}, {{this.Club_ID}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+<script src="./js/delete_club_member.js"></script>
     </div>
     <p>&nbsp;</p>
     <div id="insert">
