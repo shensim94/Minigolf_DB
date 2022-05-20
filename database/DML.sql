@@ -6,6 +6,13 @@ SELECT club_members.player_id AS "Player ID", players.name AS "Name", club_membe
 INNER JOIN players on players.player_id = club_members.player_id
 INNER JOIN clubs on clubs.club_id = club_members.club_id;
 
+--Query for unique members in club_members table
+SELECT club_members.player_id AS 'Player_ID',
+players.name AS 'Name',
+club_members.club_id 
+FROM club_members 
+INNER JOIN players on players.player_id = club_members.player_id GROUP BY Name;
+
 --Query for all clubs
 SELECT * FROM clubs ORDER BY club_id ASC;
 
@@ -84,7 +91,8 @@ VALUES
 --should only delete a single membership.
 DELETE from club_members WHERE player_id = :player_id_from_select AND club_id= :club_id_from_select;
 
---(Not including update as we'd only add or remove.)
+--Update a club-membership (incase of a mis-select)
+UPDATE club_members SET club_id = :new_club_id WHERE club_id = :old_club_id AND player_id = :person_from_select};
 
 --Insert hole_scores
 INSERT INTO hole_scores
