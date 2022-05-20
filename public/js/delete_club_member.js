@@ -1,5 +1,8 @@
-///CODE PROVIDED BY AND ADAPTED FOR THIS PROGRAM FROM COMPANION GUIDE:
-//https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
+//Authors: Allan Hillyer and Simon Shen
+// Citation for the following file:
+// Date: 05/19/2022
+//Adapted From: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
+
 
 function deletePerson(player_id, club_id) {
     let link = '/delete-club-member';

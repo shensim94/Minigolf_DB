@@ -1,4 +1,8 @@
-//adapted from: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
+//Authors: Allan Hillyer and Simon Shen
+// Citation for the following file:
+// Date: 05/19/2022
+// Adapted from: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
+
 // Get the objects we need to modify
 let addPersonForm = document.getElementById('addmembership');
 

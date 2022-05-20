@@ -1,6 +1,7 @@
 //Authors: Allan Hillyer and Simon Shen
-//Code adapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app
-
+// Citation for the following file:
+// Date: 05/19/2022
+// Adapted from: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 /*
     SETUP
 */
@@ -95,6 +96,7 @@ app.put('/update-club-member', function(req,res,next)
         res.sendStatus(400);
     }
 
+    //update where
     let query = `UPDATE club_members SET club_id = ${newID} WHERE club_id = ${originID} AND player_id = ${person};`
     db.pool.query(query, function(error, fields){
         if(error)
@@ -122,6 +124,7 @@ app.listen(PORT, function () {            // This is the basic syntax for what i
 
 function refresh(req, res)
 {
+    //join query for club_members
     let query1 = "SELECT club_members.player_id AS 'Player_ID', players.name AS 'Name', club_members.club_id AS 'Club_ID', clubs.name AS 'Club_Name' FROM club_members INNER JOIN players on players.player_id = club_members.player_id INNER JOIN clubs on clubs.club_id = club_members.club_id;";
     db.pool.query(query1, function(error, rows, fields){
         // If there was an error on the second query, send a 400
@@ -133,6 +136,7 @@ function refresh(req, res)
         }
         else
         {
+            //to populate clubs variable
             let query2 = "SELECT club_id, name FROM clubs"
             db.pool.query(query2, function(error, clubs, fields){
 
@@ -145,6 +149,7 @@ function refresh(req, res)
                 }
                 else
                 {
+                    //to populate current members 
                     let query3 = "SELECT club_members.player_id AS 'Player_ID', players.name AS 'Name', club_members.club_id FROM club_members INNER JOIN players on players.player_id = club_members.player_id GROUP BY Name;";
                     db.pool.query(query3, function(error, names, fields){
                         if (error) {
@@ -155,6 +160,7 @@ function refresh(req, res)
                         }
                         else
                         {
+                            //to get a list of all players
                             let query4 = "SELECT player_id, name FROM players;";
                             db.pool.query(query4, function(error, players, fields){
                                 if(error)
