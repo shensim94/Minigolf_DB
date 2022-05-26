@@ -1,0 +1,162 @@
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script language="JavaScript">
+        function showform(dowhat) {
+          /*
+          * four DIVS: browse, insert, update, delete
+          * this function sets one visible the others not
+          */
+          if (dowhat == 'insert') {
+            document.getElementById('browse').style.display = 'block';
+            document.getElementById('insert').style.display = 'block';
+            document.getElementById('update').style.display = 'none';
+            document.getElementById('delete').style.display = 'none';
+          }
+          else if (dowhat == 'update') {
+            document.getElementById('browse').style.display = 'block';
+            document.getElementById('insert').style.display = 'none';
+            document.getElementById('update').style.display = 'block';
+            document.getElementById('delete').style.display = 'none';
+          }
+          else if (dowhat == 'delete') {
+            document.getElementById('browse').style.display = 'block';
+            document.getElementById('insert').style.display = 'none';
+            document.getElementById('update').style.display = 'none';
+            document.getElementById('delete').style.display = 'block';
+          }
+          else if (dowhat == 'all') {
+            document.getElementById('browse').style.display = 'block';
+            document.getElementById('insert').style.display = 'block';
+            document.getElementById('update').style.display = 'block';
+            document.getElementById('delete').style.display = 'block';
+          }
+          else { //by default display browse
+            document.getElementById('browse').style.display = 'block';
+            document.getElementById('insert').style.display = 'none';
+            document.getElementById('update').style.display = 'none';
+            document.getElementById('delete').style.display = 'none';
+          }
+        }
+        function newClub() { showform('insert'); }
+        function updateClub() { showform('update'); }
+        function deleteClub() { showform('delete'); }
+        function browseClubs() { showform('browse'); }
+      </script>
+</head>
+
+<body onload="browseClubs()">
+    [ <a href="players.html">Players</a> | <a href="clubs.html">Clubs</a> | <a href="holes.html">Holes</a> | <a
+        href="hole_scores.html">Hole Scores</a> | <a href="club_members.html">Club Members</a>]
+    <p>&nbsp;</p>
+    <h1>Clubs</h1>
+    Add, remove, or edit a club.<br>
+</br>
+    <div id="search club">
+        <form method="GET" id="search club">
+          <legend><strong>Search for a club</strong></legend>
+          <fieldset class="fields">
+              <table>
+                  <tr>
+                      <td><label> name</label></td>
+                      <td><input type="text"></td>
+                  </tr>
+                  <tr>
+                    <td><label> address</label></td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td><label> zip_code</label></td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td><label> city</label></td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td><label> state</label></td>
+                    <td><input type="text"></td>
+                </tr>
+              </table>
+          </fieldset>
+          <input class="btn" type="submit" id="search club" value="search club">
+        </form>
+      </div><!-- insert -->
+      
+    <div id="browse">
+        <table id = "clubs_table" border="1" cellpadding="5">
+            <thead>
+                <tr>
+                    {{#each data.[0]}}
+                    <th>
+                        {{@key}}
+                    </th>
+                    {{/each}}
+                </tr>
+            </thead>
+            <tbody>
+                {{#each data}}
+                <tr data-i={{this.club_id}}>
+                    <td>{{this.club_id}}</td>
+                    <td>{{this.name}}</td>
+                    <td>{{this.description}}</td>
+                    <td>{{this.address}}</td>
+                    <td>{{this.zip_code}}</td>
+                    <td>{{this.city}}</td>
+                    <td>{{this.state}}</td>
+                    <!--Add buttons here-->
+                </tr>
+                {{/each}}
+            </tbody>
+            </table>
+        <button type="button" onclick="newClub()">ADD</button>
+    </div>
+    <p>&nbsp;</p>
+    <div id="insert">
+        <form method="POST" id="add club">
+            <table border="1" cellpadding="5">
+                <tr>
+                    <th>name</th>
+                    <th>description</th>
+                    <th>address</th>
+                    <th>zip_code</th>
+                    <th>city</th>
+                    <th>state</th>
+                </tr>
+                <tr>
+                    <td><input type="text" name="name"></td>
+                    <td><input type="text" name="description"></td>
+                    <td><input type="text" name="address"></td>
+                    <td><input type="text" name="zip_code"></td>
+                    <td><input type="text" name="city"></td>
+                    <td><input type="text" name="state"></td>
+                </tr>
+            </table>
+            <input class="btn" type="submit" value="add club">
+        </form>
+    </div><!-- insert -->
+    <p>&nbsp;</p>
+    <div id="update">
+        <form method="POST" id="update club">
+            <table border="1" cellpadding="5">
+                <tr>
+                    <th>name</th>
+                    <th>description</th>
+                    <th>address</th>
+                    <th>zip_code</th>
+                    <th>city</th>
+                    <th>state</th>
+                </tr>
+                <tr>
+                    <td><input type="text" name="name" value="Happy Land"></td>
+                    <td><input type="text" name="description"></td>
+                    <td><input type="text" name="address"></td>
+                    <td><input type="text" name="zip_code"></td>
+                    <td><input type="text" name="city"></td>
+                    <td><input type="text" name="state"></td>
+                </tr>
+            </table>
+            <input class="btn" type="submit" value="update club">
+        </form>
+    </div><!-- insert -->
+    
+</body>

@@ -1,5 +1,5 @@
 <head>
-    <title>MiniGolf Fanatics</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script language="JavaScript">
         function showform(dowhat) {
           /*
@@ -83,52 +83,31 @@
       </div><!-- insert -->
       
     <div id="browse">
-        <table border="1" cellpadding="5">
-            <tr>
-                <th>id</th>
-                <th><button>name</button></th>
-                <th>description</th>
-                <th>address</th>
-                <th><button>zip_code</button></th>
-                <th><button>city</button></th>
-                <th><button>state</button></th>
-                <th></th>
-                <th></th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Happy Land</td>
-                <td>Course filled with all your childhood dreams</td>
-                <td>1436 Subway Ave.</td>
-                <td>37456</td>
-                <td>Greenvile</td>
-                <td>GA</td>
-                <td><button type="button" onclick = 'updateClub()'>EDIT</button></td>
-                <td><button type="button" onclick = 'deleteClub()'>DELETE</button></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Gator Land</td>
-                <td>Where Chub lost his hand</td>
-                <td>245 4th St.</td>
-                <td>37456</td>
-                <td>Greenvile</td>
-                <td>GA</td>
-                <td><button type="button" onclick = 'updateClub()'>EDIT</button></td>
-                <td><button type="button" onclick = 'deleteClub()'>DELETE</button></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Ole Country Club</td>
-                <td>A popular gathering place for the pompous and self absorbed</td>
-                <td>420 Magnolia Ave.</td>
-                <td>36532</td>
-                <td>Springfield</td>
-                <td>GA</td>
-                <td><button type="button" onclick = 'updateClub()'>EDIT</button></td>
-                <td><button type="button" onclick = 'deleteClub()'>DELETE</button></td>
-            </tr>
-        </table>
+        <table id = "clubs_table" border="1" cellpadding="5">
+            <thead>
+                <tr>
+                    {{#each data.[0]}}
+                    <th>
+                        {{@key}}
+                    </th>
+                    {{/each}}
+                </tr>
+            </thead>
+            <tbody>
+                {{#each data}}
+                <tr data-i={{this.club_id}}>
+                    <td>{{this.club_id}}</td>
+                    <td>{{this.name}}</td>
+                    <td>{{this.description}}</td>
+                    <td>{{this.address}}</td>
+                    <td>{{this.zip_code}}</td>
+                    <td>{{this.city}}</td>
+                    <td>{{this.state}}</td>
+                    <!--Add buttons here-->
+                </tr>
+                {{/each}}
+            </tbody>
+            </table>
         <button type="button" onclick="newClub()">ADD</button>
     </div>
     <p>&nbsp;</p>

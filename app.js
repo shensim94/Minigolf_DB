@@ -27,6 +27,11 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
 
 app.use('/', routes);
 
+app.get('/', function(req,res)
+{
+    res.render('index');
+})
+
 /*
     LISTENER
 */

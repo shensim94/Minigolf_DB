@@ -140,7 +140,7 @@ function refresh(req, res)
                                 }
                                 else
                                 {
-                                    res.render('index', { data: rows, clubs: clubs, names:names, players: players });
+                                    res.render('club_member', { data: rows, clubs: clubs, names:names, players: players });
                                 }
                             })
 

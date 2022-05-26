@@ -1,0 +1,95 @@
+<!-- club_member.hbs -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<body>
+    [ <a href="players.html">Players</a> | <a href="clubs.html">Clubs</a> | <a href="holes.html">Holes</a> | <a
+        href="hole_scores.html">Hole Scores</a> | <a href="club_members.html">Club Members</a>]
+    <h1>Club Members</h1>
+    Add or remove memberships.<br>
+    <div id="browse">
+    <table id = "club_members_table" border="1" cellpadding="5">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr data-p={{this.Player_ID}} data-c={{this.Club_ID}}>
+            <td>{{this.Player_ID}}</td>
+            <td>{{this.Name}}</td>
+            <td>{{this.Club_ID}}</td>
+            <td>{{this.Club_Name}}</td>
+            <td><button onclick="deletePerson({{this.Player_ID}}, {{this.Club_ID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_club_member.js"></script>
+    </div>
+    <!-- insert -->
+    {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+    <p>&nbsp;</p>
+    <div id="insert">
+        <form id="addmembership">
+            <legend><strong>Add New Membership</strong></legend>
+            <select name="input_player_id" id="input_player_id">
+             <option value="test">Select a Person</option>
+             {{#each players}}
+             <option value="{{this.player_id}}">{{this.name}}</option>
+             {{/each}}
+            </select>
+
+            <select name="input_club_id" id="input_club_id">
+            <option value="test">Select a Club</option>
+            {{#each clubs}}
+            <option value="{{this.club_id}}">{{this.name}}</option>
+            {{/each}}
+            </select>
+        <input type="submit">
+        </form>
+    </div>
+    <script src="./js/add_club_member.js"></script>
+    <p>&nbsp;</p>
+
+<form id="update-club-member">
+<legend><strong>Update Existing Membership</strong></legend>
+    <label for="input-name">Name:</label>
+    <select name="input-name" id="mySelect">
+        <option value="test">Select a Person</option>
+        {{#each names}}
+        <option value="{{this.Player_ID}}">{{this.Name}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-original-membership">Original Membership:</label>
+    <select name="input-original-membership" id="input-original-membership">
+        <option>Select original membership:</option>
+        {{#each clubs}}
+        <option value="{{this.club_id}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-new-membership">New Membership: </label>
+    <select name="input-new-membership" id="input-new-membership">
+        <option>Select new membership:</option>
+        {{#each clubs}}
+        <option value="{{this.club_id}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+    <input type="submit">
+</form>
+<script src="./js/update_club_member.js"></script>
+</body>
