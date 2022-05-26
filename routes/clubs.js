@@ -62,7 +62,22 @@ router.put('/updateclub', function(req,res)
 
 router.delete('/deleteclub', function(req, res)
 {
+    let data = req.body;
+    let clubID = parseInt(data.id);
+    let deleteQuery = `DELETE FROM clubs WHERE club_id = ${clubID}`;
+    // Run the 1st query
+    db.pool.query(deleteQuery, function (error, fields) {
+        if (error) {
 
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        } else 
+        {
+            //204-> no content code
+            res.sendStatus(204);
+        }
+    })
 })
 
 router.get('/', function(req,res)
