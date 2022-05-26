@@ -4,10 +4,10 @@
 // Adapted from: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
 
 // Get the objects we need to modify
-let addPersonForm = document.getElementById('addclub');
+let addClubForm = document.getElementById('addclub');
 
 // Modify the objects we need
-addPersonForm.addEventListener("submit", function (e) {
+addClubForm.addEventListener("submit", function (e) {
     
     // Prevent the form from submitting
     e.preventDefault();

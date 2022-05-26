@@ -35,6 +35,31 @@
         function newClub() { showform('insert'); }
         function updateClub() { showform('update'); }
         function browseClubs() { showform('browse'); }
+        function populate(club_id)
+        {
+            let table = document.getElementById("clubs_table");
+            for (let i = 0, row; row = table.rows[i]; i++) {
+                let isClub = table.rows[i].getAttribute("data-i") == club_id;
+                if(isClub)
+                {
+                    let club = table.rows[i];
+                    let name = club.getAttribute("data-n");
+                    let desc = club.getAttribute("data-d");
+                    let addr = club.getAttribute("data-a");
+                    let zip = club.getAttribute("data-z");
+                    let city = club.getAttribute("data-c");
+                    let state = club.getAttribute("data-s");
+                    document.getElementById('upd-id').innerHTML = club_id;
+                    document.getElementById('upd-name').value = name;
+                    document.getElementById('upd-desc').value = desc;
+                    document.getElementById('upd-address').value = addr;
+                    document.getElementById('upd-zip').value = zip;
+                    document.getElementById('upd-city').value = city;
+                    document.getElementById('upd-state').value = state;
+                }
+            }
+
+        }
       </script>
 </head>
 
@@ -88,7 +113,8 @@
             </thead>
             <tbody>
                 {{#each data}}
-                <tr data-i={{this.club_id}}>
+                <tr data-i={{this.club_id}} data-n="{{this.name}}" data-d="{{this.description}}"
+                data-a="{{this.address}}" data-z="{{this.zip_code}}" data-c="{{this.city}}" data-s="{{this.state}}">
                     <td>{{this.club_id}}</td>
                     <td>{{this.name}}</td>
                     <td>{{this.description}}</td>
@@ -96,7 +122,7 @@
                     <td>{{this.zip_code}}</td>
                     <td>{{this.city}}</td>
                     <td>{{this.state}}</td>
-                    <td><button type="button" onclick="updateClub()">EDIT</button></td>
+                    <td><button type="button" onclick="updateClub(); populate({{this.club_id}});">EDIT</button></td>
                     <td><button type="button" onclick="deleteClub({{this.club_id}})">DELETE</button></td>
                     <!--Add buttons here-->
                 </tr>
@@ -135,9 +161,10 @@
 
     <p>&nbsp;</p>
     <div id="update">
-        <form method="PUT" id="update_club">
+        <form id="update_club">
             <table border="1" cellpadding="5">
                 <tr>
+                    <th>club_id</th>
                     <th>name</th>
                     <th>description</th>
                     <th>address</th>
@@ -146,12 +173,13 @@
                     <th>state</th>
                 </tr>
                 <tr>
-                    <td><input type="text" name="name" value="Happy Land"></td>
-                    <td><input type="text" name="description"></td>
-                    <td><input type="text" name="address"></td>
-                    <td><input type="text" name="zip_code"></td>
-                    <td><input type="text" name="city"></td>
-                    <td><input type="text" name="state"></td>
+                    <td><label id="upd-id"></label></td>
+                    <td><input id="upd-name" type="text" name="name"></td>
+                    <td><input id="upd-desc" type="text" name="description"></td>
+                    <td><input id="upd-address" type="text" name="address"></td>
+                    <td><input id="upd-zip" type="text" name="zip_code"></td>
+                    <td><input id="upd-city" type="text" name="city"></td>
+                    <td><input id="upd-state" type="text" name="state"></td>
                 </tr>
             </table>
             <input class="btn" type="submit" value="update club">
