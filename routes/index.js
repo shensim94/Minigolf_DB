@@ -1,0 +1,3 @@
+const router = module.exports = require('express').Router();
+
+router.use('/club_members', require('./club_members').router);
