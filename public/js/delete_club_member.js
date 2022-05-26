@@ -5,7 +5,7 @@
 
 
 function deletePerson(player_id, club_id) {
-    let link = '/delete-club-member';
+    let link = 'club_members/delete-club-member';
     let data = {
         id: player_id,
         cid: club_id
