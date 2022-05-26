@@ -1,16 +1,15 @@
 <!-- club_member.hbs -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <body>
-    [ <a href="players.html">Players</a> | <a href="clubs.html">Clubs</a> | <a href="holes.html">Holes</a> | <a
-        href="hole_scores.html">Hole Scores</a> | <a href="club_members.html">Club Members</a>]
+    [ <a href="/players">Players</a> | <a href="/clubs">Clubs</a> | <a href="/holes">Holes</a> | <a
+        href="/hole_scores">Hole Scores</a> | <a href="/club_members">Club Members</a>]
     <h1>Club Members</h1>
     Add or remove memberships.<br>
     <div id="browse">
-    <table id = "club_members_table" border="1" cellpadding="5">
 
+    <table id = "club_members_table" border="1" cellpadding="5">
     {{!-- Header section --}}
     <thead>
-
         {{!-- For just the first row, we print each key of the row object as a header cell so we
         know what each column means when the page renders --}}
         <tr>

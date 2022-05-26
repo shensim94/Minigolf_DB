@@ -10,36 +10,30 @@
             document.getElementById('browse').style.display = 'block';
             document.getElementById('insert').style.display = 'block';
             document.getElementById('update').style.display = 'none';
-            document.getElementById('delete').style.display = 'none';
           }
           else if (dowhat == 'update') {
             document.getElementById('browse').style.display = 'block';
             document.getElementById('insert').style.display = 'none';
             document.getElementById('update').style.display = 'block';
-            document.getElementById('delete').style.display = 'none';
           }
           else if (dowhat == 'delete') {
             document.getElementById('browse').style.display = 'block';
             document.getElementById('insert').style.display = 'none';
             document.getElementById('update').style.display = 'none';
-            document.getElementById('delete').style.display = 'block';
           }
           else if (dowhat == 'all') {
             document.getElementById('browse').style.display = 'block';
             document.getElementById('insert').style.display = 'block';
             document.getElementById('update').style.display = 'block';
-            document.getElementById('delete').style.display = 'block';
           }
           else { //by default display browse
             document.getElementById('browse').style.display = 'block';
             document.getElementById('insert').style.display = 'none';
             document.getElementById('update').style.display = 'none';
-            document.getElementById('delete').style.display = 'none';
           }
         }
         function newClub() { showform('insert'); }
         function updateClub() { showform('update'); }
-        function deleteClub() { showform('delete'); }
         function browseClubs() { showform('browse'); }
       </script>
 </head>
@@ -80,8 +74,7 @@
           </fieldset>
           <input class="btn" type="submit" id="search club" value="search club">
         </form>
-      </div><!-- insert -->
-      
+      </div>
     <div id="browse">
         <table id = "clubs_table" border="1" cellpadding="5">
             <thead>
@@ -108,11 +101,12 @@
                 {{/each}}
             </tbody>
             </table>
-        <button type="button" onclick="newClub()">ADD</button>
+        <button type="button" onclick="newClub()">Add</button>
     </div>
+
     <p>&nbsp;</p>
     <div id="insert">
-        <form method="POST" id="add club">
+        <form id="addclub">
             <table border="1" cellpadding="5">
                 <tr>
                     <th>name</th>
@@ -123,20 +117,22 @@
                     <th>state</th>
                 </tr>
                 <tr>
-                    <td><input type="text" name="name"></td>
-                    <td><input type="text" name="description"></td>
-                    <td><input type="text" name="address"></td>
-                    <td><input type="text" name="zip_code"></td>
-                    <td><input type="text" name="city"></td>
-                    <td><input type="text" name="state"></td>
+                    <td><input type="text" name="name" id="input_name"></td>
+                    <td><input type="text" name="description" id="input_description"></td>
+                    <td><input type="text" name="address" id="input_address"></td>
+                    <td><input type="text" name="zip_code" id="input_zip"></td>
+                    <td><input type="text" name="city" id="input_city"></td>
+                    <td><input type="text" name="state" id="input_state"></td>
                 </tr>
             </table>
-            <input class="btn" type="submit" value="add club">
+            <input type="submit" value="Add Club">
         </form>
-    </div><!-- insert -->
+    </div>
+    <script src="./js/add_club.js"></script>
+
     <p>&nbsp;</p>
     <div id="update">
-        <form method="POST" id="update club">
+        <form method="PUT" id="update_club">
             <table border="1" cellpadding="5">
                 <tr>
                     <th>name</th>
@@ -157,6 +153,6 @@
             </table>
             <input class="btn" type="submit" value="update club">
         </form>
-    </div><!-- insert -->
-    
+    </div>
+    <script src="./js/update_club.js"></script>
 </body>

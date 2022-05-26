@@ -7,31 +7,28 @@ exports.router = router;
 router.post('/addclub', function(req, res)
 {
     let data = req.body;
-    let name = data.name.toString();
-    let description = data.description.toString();
-    let address = data.address.toString();
-    let zip_code = parseInt(data.zip_code);
-    let city = data.city.toString();
-    let state = data.city.toString();
+    if(!data.name || !data.address || !data.zip_code || !data.city || !data.state)
+    {
+        res.sendStatus(400);
+    }
+    let name = `"` + data.name.toString() + `"`;
+    let description = data.description
+    if(data.description)
+    {
+        description = `"` + data.description.toString() + `"`;
+    }else
+    {
+        description = null;
+    }
 
-    let query1 = `INSERT INTO clubs
-    (
-        name,
-        description,
-        address,
-        zip_code,
-        city,
-        state
-    )
-    VALUES
-    (
-        ${name},
-        ${description},
-        ${address},
-        ${zip_code},
-        ${city},
-        ${state}
-    );`;
+    let address = `"` + data.address.toString()+ `"`;
+    let zip_code = parseInt(data.zip_code);
+    let city = `"` + data.city.toString() + `"`;
+    let state = `"` + data.state.toString() + `"`;
+
+    let query1 = `INSERT INTO clubs (name, description, address, zip_code, city, state)`;
+    query1 = query1 + `VALUES(${name}, ${description}, ${address}, ${zip_code}, ${city}, ${state});`;
+    
     db.pool.query(query1, function(error, rows, fields)
     {
         if(error)
