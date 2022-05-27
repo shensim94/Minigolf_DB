@@ -57,7 +57,42 @@ router.post('/addclub', function(req, res)
 
 router.put('/updateclub', function(req,res)
 {
+    let data = req.body;
+    if(!data.id || !data.name || !data.address || !data.zip || !data.state || !data.city)
+    {
+        res.sendStatus(400);
+        return;
+    }
+    let id = parseInt(data.id);
+    let name = `"` + data.name + `"`;
+    let desc = `"` + data.description + `"`;
+    let city = `"` + data.city + `"`;
+    let address = `"` + data.address + `"`;
+    let zip = parseInt(data.zip);
+    let state = `"` + data.state + `"`;
 
+    //update where
+    let query = `UPDATE clubs
+    SET
+    name = ${name},
+    description = ${desc},
+    address = ${address},
+    zip_code = ${zip},
+    city = ${city},
+    state = ${state}
+    WHERE club_id = ${id}`;
+
+    db.pool.query(query, function(error, fields){
+        if(error)
+        {
+            console.log(error);
+            res.sendStatus(400);
+        }
+        else
+        {
+            res.sendStatus(200);
+        }
+    })
 })
 
 router.delete('/deleteclub', function(req, res)
