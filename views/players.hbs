@@ -1,0 +1,186 @@
+<html>
+
+<head>
+  <title>MiniGolf Fanatics</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <script language="JavaScript">
+    function showform(dowhat) {
+      /*
+      * four DIVS: browse, insert, update, delete
+      * this function sets one visible the others not
+      */
+      if (dowhat == 'insert') {
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'block';
+        document.getElementById('update').style.display = 'none';
+        document.getElementById('delete').style.display = 'none';
+      }
+      else if (dowhat == 'update') {
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'block';
+        document.getElementById('delete').style.display = 'none';
+      }
+      else if (dowhat == 'delete') {
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'none';
+        document.getElementById('delete').style.display = 'block';
+      }
+      else if (dowhat == 'all') {
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'block';
+        document.getElementById('update').style.display = 'block';
+        document.getElementById('delete').style.display = 'block';
+      }
+      else { //by default display browse
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'none';
+        document.getElementById('delete').style.display = 'none';
+      }
+    }
+    function newPlayer() { showform('insert'); }
+    function updatePlayer(pid) { showform('update'); }
+    function deleteplayer(pid) { showform('delete'); }
+    function browsePlayers() { showform('browse'); }
+  </script>
+</head>
+
+<body onload="browsePlayers()">
+  [ <a href="players">Players</a> | <a href="clubs">Clubs</a> | <a href="holes">Holes</a> | 
+    <a href="hole_scores">Hole Scores</a> | <a href="/club_members">Club Members</a>]
+  <h1>Players</h1>
+  Add, Edit, or Delete Players.<br>
+</br>
+<div id="search player">
+  <form method="GET" id="search player">
+    <legend><strong>Search for a player</strong></legend>
+    <fieldset class="fields">
+      <table>
+        <tr>
+            <td><label> name</label></td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+          <td><label> address</label></td>
+          <td><input type="text"></td>
+      </tr>
+      <tr>
+          <td><label> zip_code</label></td>
+          <td><input type="text"></td>
+      </tr>
+      <tr>
+          <td><label> city</label></td>
+          <td><input type="text"></td>
+      </tr>
+      <tr>
+          <td><label> state</label></td>
+          <td><input type="text"></td>
+      </tr>
+    </table>
+    </fieldset>
+    <input class="btn" type="submit" id="search player" value="search player">
+  </form>
+</div><!-- insert -->
+
+  <div id="browse">
+    <table id = "players_table" border="1" cellpadding="5">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr data-value="{{this.player_id}}">
+            <td>{{this.player_id}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.address}}</td>
+            <td>{{this.zip_code}}</td>
+            <td>{{this.city}}</td>
+            <td>{{this.state}}</td>
+            <td><button onclick="deletePlayer({{this.player_id}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+<script src="./js/delete_player.js"></script>
+</table>
+    <button type="button" onclick="newPlayer()">ADD</button>
+    <p>&nbsp;</p>
+  </div> <!-- browse -->
+  <div id="insert">
+    <form id="add_player">
+      <legend><strong>Add a Player</strong></legend>
+      <fieldset class="fields">
+        <label for="input-name"> name: </label>
+        <input type="text" name="input-name" id="input-name">
+        
+        <label for="input-address">address: </label>
+        <input type="text" name="input-address" id="input-address">
+
+        <label for="input-zip">zip code: </label>
+        <input type="number" name="input-zip" id="input-zip">
+
+        <label for="input-city">city: </label>
+        <input type="text" name="input-city" id="input-city">
+
+        <label for="input-state">state: </label>
+        <input type="text" name="input-state" id="input-state">
+      </fieldset>
+      <input type="submit" id="addPerson" value="Add Player" onClick="browsePlayers()">
+      <input class="btn" type="button" value="Cancel" onClick="browsePlayers()">
+    </form>
+  <script src="./js/add_player.js"></script>
+  </div><!-- insert -->
+  <p>&nbsp;</p>
+  
+    <h2>Update Player</h2>
+    <form id="update_player" method="PUT" action="/update_player">
+
+        <label for="input-id">player id: </label>
+        <select name="input-id" id="select-id">
+            <option value="test">Select player id</option>
+            {{#each data}}
+            <option value="{{this.player_id}}">{{this.player_id}}</option>
+            {{/each}}
+        </select>
+        <label for="update-name">name: </label>
+        <input type="text" name="update-name" id="update-name">
+
+
+        <label for="update-address">address: </label>
+        <input type="text" name="update-address" id="update-address">
+
+
+        <label for="update-zip">zip code: </label>
+        <input type="number" name="update-zip" id="update-zip">
+
+        <label for="update-city">city: </label>
+        <input type="text" name="update-city" id="update-city">
+
+
+        <label for="update-state">state: </label>
+        <input type="text" name="update-state" id="update-state">
+        
+        <input type="submit">
+
+    </form>
+<script src="./js/update_player.js"></script>
+
+</body>
+
+</html>
