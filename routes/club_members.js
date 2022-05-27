@@ -71,6 +71,7 @@ app.put('/update-club-member', function(req,res,next)
     if(!person || !originID || !newID)
     {
         res.sendStatus(400);
+        return;
     }
 
     //update where

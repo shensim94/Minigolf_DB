@@ -10,6 +10,7 @@ router.post('/addclub', function(req, res)
     if(!data.name || !data.address || !data.zip_code || !data.city || !data.state)
     {
         res.sendStatus(400);
+        return;
     }
     let name = `"` + data.name.toString() + `"`;
     let description = data.description
