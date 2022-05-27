@@ -1,3 +1,8 @@
+//Authors: Allan Hillyer and Simon Shen
+// Citation for the following file:
+// Date: 05/26/2022
+//Adapted From: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%208%20-%20Dynamically%20Updating%20Data
+
 // Get the objects we need to modify
 let updatePersonForm = document.getElementById('update_player');
 
