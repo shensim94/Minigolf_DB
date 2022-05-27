@@ -1,3 +1,8 @@
+//Authors: Allan Hillyer and Simon Shen
+// Citation for the following file:
+// Date: 05/26/2022
+// https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
+
 function deletePlayer(player_id) {
     // Put our data we want to send in a javascript object
     let data = {
