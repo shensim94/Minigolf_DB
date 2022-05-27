@@ -11,7 +11,7 @@ function deletePlayer(player_id) {
 
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
-    xhttp.open("DELETE", "/delete_player", true);
+    xhttp.open("DELETE", "/players/delete_player", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve
