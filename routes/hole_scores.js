@@ -28,3 +28,20 @@ app.get('/', function(req,res)
         }
     })  
 })
+
+app.delete('/deleteholescore', function(req, res)
+{
+    let data = req.body;
+    let hole_scores_id = parseInt(data.id);
+    let query = `DELETE FROM hole_scores WHERE hole_scores_id = ${hole_scores_id}`
+    db.pool.query(query, function(error, fields){
+        if(error)
+        {
+            console.log(error);
+            res.sendStatus(400);
+        } else
+        {
+            res.sendStatus(204);
+        }
+    })
+})

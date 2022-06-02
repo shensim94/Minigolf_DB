@@ -40,7 +40,6 @@
     }
     function newScore() { showform('insert'); }
     function updateScore() { showform('update'); }
-    function deleteScore() { showform('delete'); }
     function browseScores() { showform('browse'); }
   </script>
 </head>
@@ -104,11 +103,12 @@ Add, edit, or remove a hole score.<br>
             <td>{{this.hole_number}}</td>
             <td>{{this.score}}</td>
             <td><button type="button" onclick = 'updateScore()'>EDIT</button></td>
-            <td><button type="button" onclick = 'deleteScore()'>DELETE</button></td>
+            <td><button type="button" onclick = 'deleteScore({{this.hole_scores_id}})'>DELETE</button></td>
         </tr>
         </tbody>
         {{/each}}
     </table>
+    <script src="./js/delete_hole_score.js"></script>
     <button type="button" onclick="newScore()">ADD</button>
 </div>
 <p>&nbsp;</p>
