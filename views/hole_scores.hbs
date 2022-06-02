@@ -1,0 +1,158 @@
+<head>
+<title>MiniGolf Fanatics</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script language="JavaScript">
+    function showform(dowhat) {
+      /*
+      * four DIVS: browse, insert, update, delete
+      * this function sets one visible the others not
+      */
+      if (dowhat == 'insert') {
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'block';
+        document.getElementById('update').style.display = 'none';
+        document.getElementById('delete').style.display = 'none';
+      }
+      else if (dowhat == 'update') {
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'block';
+        document.getElementById('delete').style.display = 'none';
+      }
+      else if (dowhat == 'delete') {
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'none';
+        document.getElementById('delete').style.display = 'block';
+      }
+      else if (dowhat == 'all') {
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'block';
+        document.getElementById('update').style.display = 'block';
+        document.getElementById('delete').style.display = 'block';
+      }
+      else { //by default display browse
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'none';
+        document.getElementById('delete').style.display = 'none';
+      }
+    }
+    function newScore() { showform('insert'); }
+    function updateScore() { showform('update'); }
+    function deleteScore() { showform('delete'); }
+    function browseScores() { showform('browse'); }
+  </script>
+</head>
+<body onload="browseScores()">
+    [ <a href="/players">Players</a> | <a href="/clubs">Clubs</a> | <a href="/holes">Holes</a> | <a
+        href="/hole_scores">Hole Scores</a> | <a href="/club_members">Club Members</a>]
+<p>&nbsp;</p>
+<h1>Hole Scores</h1>
+Add, edit, or remove a hole score.<br>
+</br>
+<div id="search score">
+  <form method="GET" id="search score">
+    <legend><strong>lookup scores</strong></legend>
+    <fieldset class="fields">
+      <table>
+        <tr>
+            <td><label> date</label></td>
+            <td><input type="date"></td>
+        </tr>
+        <tr>
+          <td><label> player id</label></td>
+          <td><input type="number"></td>
+      </tr>
+      <tr>
+          <td><label> club id</label></td>
+          <td><input type="number"></td>
+      </tr>
+      <tr>
+          <td><label>hole number</label></td>
+          <td><input type="number"></td>
+      </tr>
+      <tr>
+          <td><label> score</label></td>
+          <td><input type="number"></td>
+      </tr>
+    </table>
+    </fieldset>
+    <input class="btn" type="submit" id="search score" value="search score">
+  </form>
+</div><!-- insert -->
+<div id="browse">
+    <table id = "hole_scores_table" border="1" cellpadding="5">
+        <thead>
+            <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            </tr>   
+        </thead>
+        <tbody>
+        {{#each data}}
+        <tr data-i={{this.hole_scores_id}}>
+            <td>{{this.hole_scores_id}}</td>
+            <td>{{formatDate this.date}}</td>
+            <td>{{this.player_id}}</td>
+            <td>{{this.player_name}}</td>
+            <td>{{this.club_id}}</td>
+            <td>{{this.club_name}}</td>
+            <td>{{this.hole_number}}</td>
+            <td>{{this.score}}</td>
+            <td><button type="button" onclick = 'updateScore()'>EDIT</button></td>
+            <td><button type="button" onclick = 'deleteScore()'>DELETE</button></td>
+        </tr>
+        </tbody>
+        {{/each}}
+    </table>
+    <button type="button" onclick="newScore()">ADD</button>
+</div>
+<p>&nbsp;</p>
+<div id="insert">
+    <form method="POST" id="addscore">
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>date</th>
+                <th>player_id</th>
+                <th>club_id</th>
+                <th>hole_number</th>
+                <th>score</th>
+            </tr>
+            <tr>
+                <td><input type="date" name="date"></td>
+                <td><input type="number" name="player_id"></td>
+                <td><input type="number" name="club_id"></td>
+                <td><input type="number" name="hole_number"></td>
+                <td><input type="number" name="score"></td>
+            </tr>
+        </table>
+        <input class="btn" type="submit" value="add score">
+    </form>
+  </div><!-- insert -->
+  <p>&nbsp;</p>
+  <div id="update">
+    <form method="POST" id="updatescore">
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>date</th>
+                <th>player_id</th>
+                <th>club_id</th>
+                <th>hole_number</th>
+                <th>score</th>
+            </tr>
+            <tr>
+                <td><input type="date" name="date" value = "2022-04-28"></td>
+                <td><input type="number" name="player_id" value="1"></td>
+                <td><input type="number" name="club_id" value="2"></td>
+                <td><input type="number" name="hole_number" value="1"></td>
+                <td><input type="number" name="score" value="3"></td>
+            </tr>
+        </table>
+        <input class="btn" type="submit" value="update score">
+    </form>
+  </div><!-- insert -->
+</body>

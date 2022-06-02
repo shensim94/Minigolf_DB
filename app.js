@@ -25,6 +25,28 @@ var exphbs = require('express-handlebars');     // Import express-handlebars
 app.engine('.hbs', engine({ extname: ".hbs" }));  // Create an instance of the handlebars engine to process templates
 app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
 
+//Citation for following function
+//Date: 6/2/2022
+//Copied from Group 105 (Christopher Tu and Mario Lopez) in their app.js
+const hbs = exphbs.create({
+    extname: ".hbs",
+    helpers: {
+        formatDate: function (date) {
+            let dateObj = new Date(date)
+            let month = dateObj.getMonth();
+            month += 1; //because Jan = 0
+            if (month < 10) month = '0' + month;
+            let day = dateObj.getDate();
+            if (day < 10) day = '0' + day;
+            let year = dateObj.getFullYear();
+            let newDate = month + '-' + day + '-' + year;
+            return newDate;
+        }
+    }
+});
+app.engine('.hbs', hbs.engine);
+//end of paste
+
 app.use('/', routes);
 
 app.get('/', function(req,res)

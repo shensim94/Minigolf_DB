@@ -19,6 +19,17 @@ SELECT * FROM clubs ORDER BY club_id ASC;
 --Query for all holes
 SELECT * FROM holes ORDER BY club_id ASC, hole_number ASC;
 
+SELECT hole_scores.hole_scores_id,
+hole_scores.date,
+hole_scores.player_id,
+players.name AS 'player_name',
+hole_scores.club_id,
+clubs.name AS 'club_name',
+hole_scores.hole_number,
+hole_scores.score FROM hole_scores
+INNER JOIN players on players.player_id = hole_scores.player_id
+INNER JOIN clubs on clubs.club_id = hole_scores.club_id;
+
 --Query for all holes at a certain course
 SELECT * FROM holes WHERE club_id = :club_id_input ORDER BY hole_number ASC;
 
