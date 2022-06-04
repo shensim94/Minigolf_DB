@@ -17,7 +17,11 @@ app.get('/', function(req, res)
 app.post('/add_player', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
-
+    if(!data.name)
+    {
+        res.sendStatus(400);
+        return;
+    }
     // Capture NULL values
     let zip = parseInt(data.zip);
     if (isNaN(zip))
