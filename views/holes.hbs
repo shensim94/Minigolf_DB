@@ -1,0 +1,173 @@
+<head>
+<title>MiniGolf Fanatics</title>
+<script language="JavaScript">
+    function showform(dowhat) {
+      /*
+      * four DIVS: browse, insert, update, delete
+      * this function sets one visible the others not
+      */
+          if (dowhat == 'insert') {
+            document.getElementById('browse').style.display = 'block';
+            document.getElementById('insert').style.display = 'block';
+            document.getElementById('update').style.display = 'none';
+          }
+          else if (dowhat == 'update') {
+            document.getElementById('browse').style.display = 'block';
+            document.getElementById('insert').style.display = 'none';
+            document.getElementById('update').style.display = 'block';
+          }
+          else if (dowhat == 'delete') {
+            document.getElementById('browse').style.display = 'block';
+            document.getElementById('insert').style.display = 'none';
+            document.getElementById('update').style.display = 'none';
+          }
+          else if (dowhat == 'all') {
+            document.getElementById('browse').style.display = 'block';
+            document.getElementById('insert').style.display = 'none';
+            document.getElementById('update').style.display = 'none';
+          }
+          else { //by default display browse
+            document.getElementById('browse').style.display = 'block';
+            document.getElementById('insert').style.display = 'none';
+            document.getElementById('update').style.display = 'none';
+          }
+    }
+    function newHole() { showform('insert'); }
+    function updateHole() { showform('update'); }
+    function browseHoles() { showform('all'); }
+    function populate(club_id, hole_number)
+        //console.log("populate!");
+        {
+            let table = document.getElementById("holes_table");
+            for (let i = 0, row; row = table.rows[i]; i++) {
+                let isClub = table.rows[i].getAttribute("data_cid") == club_id;
+                let isHole = table.rows[i].getAttribute("data_hn") == hole_number;
+                if(isClub && isHole)
+                {
+                    let hole = table.rows[i];
+                    let par_score = hole.getAttribute("data_ps");
+                    let desc = hole.getAttribute("data_desc");
+                    document.getElementById('upd_cid').innerHTML = club_id;
+                    document.getElementById('upd_hn').innerHTML = hole_number;
+                    document.getElementById('upd_ps').value = par_score;
+                    document.getElementById('upd_desc').value = desc;
+                }
+            }
+
+        }
+  </script>
+</head>
+<body onload = "browseHoles()">
+
+[ <a href="players">Players</a> | <a href="clubs">Clubs</a> | <a href="holes">Holes</a> | <a href="hole_scores">Hole Scores</a> | <a href="club_members">Club Members</a>]
+<p>&nbsp;</p>
+<h1>Holes</h1>
+Add, edit, or remove a hole.<br>
+</br>
+<div id="search hole">
+  <form method="GET" id="search hole">
+    <legend><strong>lookup holes</strong></legend>
+    <fieldset class="fields">
+      <table>
+        <tr>
+            <td><label> club id</label></td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+          <td><label> hole number</label></td>
+          <td><input type="text"></td>
+      </tr>
+      <tr>
+          <td><label> par score</label></td>
+          <td><input type="text"></td>
+      </tr>
+      <tr>
+    </table>
+    </fieldset>
+    <input class="btn" type="submit" id="search hole" value="search hole">
+  </form>
+<div id="browse">
+   <table id = "holes_table" border="1" cellpadding="5">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr data.name="{{this.name}}" data_cid={{this.club_id}} data_hn={{this.hole_number}} data_ps={{this.par_score}} data_desc="{{this.description}}" >
+            <td>{{this.name}}</td>
+            <td>{{this.club_id}}</td>
+            <td>{{this.hole_number}}</td>
+            <td>{{this.par_score}}</td>
+            <td>{{this.description}}</td>
+            <td><button type="button" onclick="updateHole(); populate({{this.club_id}}, {{this.hole_number}});">EDIT</button></td>
+            <td><button type="button" onclick="deleteHole({{this.club_id}}, {{this.hole_number}})">DELETE</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+    <script src="./js/delete_hole.js"></script>
+</table>
+    <button type="button" onclick="newHole()">ADD</button>
+</div>
+
+<p>&nbsp;</p>
+<div id="insert">
+    <form id="add_hole">
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>club_name</th>
+                <th>hole_number</th>
+                <th>par_score</th>
+                <th>description</th>
+            </tr>
+            <tr>
+                <td><select id="new_cid">
+                {{#each names}}
+                <option value="{{this.club_id}}">{{this.name}}</option>
+                {{/each}}
+                </select></td>
+                <td><input id="new_hn" type="number" name="hole_number"></td>
+                <td><input id="new_ps" type="number" name="par_score"></td>
+                <td><input id="new_desc" type="text" name="description"></td>
+            </tr>
+        </table>
+        <input class="btn" type="submit" value="add hole">
+    </form>
+    <script src="./js/add_hole.js"></script>
+  </div><!-- insert -->
+  <p>&nbsp;</p>
+  <div id="update">
+    <form id="update_hole">
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>club_id</th>
+                <th>hole_number</th>
+                <th>par_score</th>
+                <th>description</th>
+            </tr>
+            <tr>
+                <td><label id="upd_cid"></label></td>
+                <td><label id="upd_hn"></label></td>
+                <td><input id="upd_ps" type="number" name="par_score"></td>
+                <td><input id="upd_desc" type="text" name="description"></td>
+            </tr>
+        </table>
+        <input class="btn" type="submit" value="update_hole">
+    </form>
+    <script src="./js/update_hole.js"></script>
+  </div><!-- insert -->
+</body>
