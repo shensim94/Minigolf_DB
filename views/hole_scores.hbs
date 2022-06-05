@@ -1,0 +1,214 @@
+<head>
+<title>MiniGolf Fanatics</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script language="JavaScript">
+    function showform(dowhat) {
+      /*
+      * four DIVS: browse, insert, update
+      * this function sets one visible the others not
+      */
+      if (dowhat == 'insert') {
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'block';
+        document.getElementById('update').style.display = 'none';
+      }
+      else if (dowhat == 'update') {
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'block';
+      }
+      else if (dowhat == 'delete') {
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'none';
+      }
+      else if (dowhat == 'all') {
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'block';
+        document.getElementById('update').style.display = 'block';
+      }
+      else { //by default display browse
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'none';
+      }
+    }
+    function newScore() { showform('insert'); }
+    function updateScore() { showform('update'); }
+    function browseScores() { showform('browse'); }
+    function populate(hole_score_id)
+    {
+      let table = document.getElementById("hole_scores_table");
+      for(let i = 0, row; row = table.rows[i]; i++)
+      {
+        let isScore = table.rows[i].getAttribute("data-i") == hole_score_id;
+        if(isScore)
+        {
+          let holeScore = table.rows[i];
+          let date = holeScore.getAttribute("data-d");
+          let player_id = holeScore.getAttribute("data-p");
+          let club_id = holeScore.getAttribute("data-c");
+          let hole_number = holeScore.getAttribute("data-h");
+          let hole_score = holeScore.getAttribute("data-s");
+          document.getElementById("upd-hsi").innerHTML = hole_score_id;
+          document.getElementById("upd-date").valueAsDate = new Date(date);
+          document.getElementById("upd-player").value = player_id;
+          document.getElementById("upd-club").value = club_id;
+          document.getElementById("upd-hole").value = hole_number;
+          document.getElementById("upd-score").value = hole_score;
+        }
+      }
+    }
+  </script>
+</head>
+<body onload="browseScores()">
+    [ <a href="/players">Players</a> | <a href="/clubs">Clubs</a> | <a href="/holes">Holes</a> | <a
+        href="/hole_scores">Hole Scores</a> | <a href="/club_members">Club Members</a>]
+<p>&nbsp;</p>
+<h1>Hole Scores</h1>
+Add, edit, or remove a hole score.<br>
+</br>
+<div id="search score">
+  <form method="GET" id="search score">
+    <legend><strong>lookup scores</strong></legend>
+    <fieldset class="fields">
+      <table>
+        <tr>
+            <td><label> date</label></td>
+            <td><input type="date"></td>
+        </tr>
+        <tr>
+          <td><label> player id</label></td>
+          <td><input type="number"></td>
+      </tr>
+      <tr>
+          <td><label> club id</label></td>
+          <td><input type="number"></td>
+      </tr>
+      <tr>
+          <td><label>hole number</label></td>
+          <td><input type="number"></td>
+      </tr>
+      <tr>
+          <td><label> score</label></td>
+          <td><input type="number"></td>
+      </tr>
+    </table>
+    </fieldset>
+    <input class="btn" type="submit" id="search score" value="search score">
+  </form>
+</div><!-- insert -->
+<div id="browse">
+    <table id = "hole_scores_table" border="1" cellpadding="5">
+        <thead>
+            <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            </tr>   
+        </thead>
+        <tbody>
+        {{#each data}}
+        <tr data-i={{this.hole_scores_id}} 
+        data-d="{{this.date}}"
+        data-p={{this.player_id}}
+        data-c={{this.club_id}}
+        data-h={{this.hole_number}}
+        data-s={{this.score}}
+        >
+            <td>{{this.hole_scores_id}}</td>
+            <td>{{formatDate this.date}}</td>
+            <td>{{this.player_id}}</td>
+            <td>{{this.player_name}}</td>
+            <td>{{this.club_id}}</td>
+            <td>{{this.club_name}}</td>
+            <td>{{this.hole_number}}</td>
+            <td>{{this.score}}</td>
+            <td><button type="button" onclick = 'updateScore(); populate({{this.hole_scores_id}});'>EDIT</button></td>
+            <td><button type="button" onclick = 'deleteScore({{this.hole_scores_id}})'>DELETE</button></td>
+        </tr>
+        </tbody>
+        {{/each}}
+    </table>
+    <script src="./js/delete_hole_score.js"></script>
+    <button type="button" onclick="newScore()">ADD</button>
+</div>
+<p>&nbsp;</p>
+<div id="insert">
+    <form id="addscore">
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>Date</th>
+                <th>player_id</th>
+                <th>club_id</th>
+                <th>hole_number</th>
+                <th>score</th>
+            </tr>
+            <tr>
+                <td><input type="date" name="input-date" id="input-date"></td>
+                <td>
+                  <select name="input-player" id="input-player">
+                    <option value="test">Select a Person</option>
+                    {{#each players}}
+                    <option value="{{this.player_id}}">{{this.name}}</option>
+                    {{/each}}
+                  </select>
+                </td>
+                <td>
+                  <select name="input-club" id="input-club">
+                    <option value="test">Select a Club</option>
+                    {{#each clubs}}
+                    <option value="{{this.club_id}}">{{this.name}}</option>
+                    {{/each}}
+                  </select>
+                </td>
+                <td><input type="number" id="input-hole"></td>
+                <td><input type="number" id="input-score"></td>
+            </tr>
+        </table>
+        <input type="submit" value="add score">
+    </form>
+  </div>
+  <script src="./js/add_hole_score.js"></script>
+  <p>&nbsp;</p>
+  <div id="update">
+    <form id="updatescore">
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>hole_score_id</th>
+                <th>date</th>
+                <th>player_id</th>
+                <th>club_id</th>
+                <th>hole_number</th>
+                <th>score</th>
+            </tr>
+            <tr>
+                <td><label id="upd-hsi"></label></td>
+                <td><input type="date" id="upd-date"></td>
+                <td>
+                  <select name="upd-player" id="upd-player">
+                    <option value="test">Select a Person</option>
+                    {{#each players}}
+                    <option value="{{this.player_id}}">{{this.name}}</option>
+                    {{/each}}
+                  </select>
+                </td>
+                <td>
+                    <select name="upd-club" id="upd-club">
+                    <option value="test">Select a Club</option>
+                    {{#each clubs}}
+                    <option value="{{this.club_id}}">{{this.name}}</option>
+                    {{/each}}
+                  </select>
+                </td>
+                <td><input type="number" id="upd-hole"></td>
+                <td><input type="number" id="upd-score"></td>
+            </tr>
+        </table>
+        <input type="submit" value="update score">
+  <script src="./js/update_hole_score.js"></script>
+    </form>
+  </div><!-- insert -->
+</body>
