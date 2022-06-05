@@ -108,10 +108,37 @@ app.post('/addholescore', function(req,res)
     })
 })
 
-// app.put('/updateholescore', function(req,res)
-// {
-//     let data = req.body;
-//     let hole_scores_id = parseInt(data.id);
-//     let 
-//     let query = `UPDATE hole_scores SET `
-// })
+app.put('/updateholescore', function(req,res)
+{
+    let data = req.body;
+    let hole_scores_id = parseInt(data.id);
+    let date = data.date;
+    let player = parseInt(data.player);
+    let club = parseInt(data.club);
+    let hole = parseInt(data.hole);
+    let score = parseInt(data.score);
+    if(!hole_scores_id || !date || !player || !club || !hole || !score)
+    {
+        res.sendStatus(400);
+        return;
+    }
+
+    let query = `UPDATE hole_scores SET 
+    date = "${date}"
+    player_id = ${player}
+    club_id = ${club}
+    hole_number = ${hole_number}
+    score = ${score} WHERE hole_scores_id = ${hole_scores_id};`;
+    db.pool.query(query, function(error, rows)
+    {
+        if(error)
+        {
+            console.log(error);
+            res.sendStatus(400);
+        }
+        else
+        {
+            res.send(rows);
+        }
+    })
+})

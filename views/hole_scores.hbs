@@ -36,6 +36,29 @@
     function newScore() { showform('insert'); }
     function updateScore() { showform('update'); }
     function browseScores() { showform('browse'); }
+    function populate(hole_score_id)
+    {
+      let table = document.getElementById("hole_scores_table");
+      for(let i = 0, row; row = table.rows[i]; i++)
+      {
+        let isScore = table.rows[i].getAttribute("data-i") == hole_score_id;
+        if(isScore)
+        {
+          let holeScore = table.rows[i];
+          let date = holeScore.getAttribute("data-d");
+          let player_id = holeScore.getAttribute("data-p");
+          let club_id = holeScore.getAttribute("data-c");
+          let hole_number = holeScore.getAttribute("data-h");
+          let hole_score = holeScore.getAttribute("data-s");
+          document.getElementById("upd-hsi").value = hole_score_id;
+          document.getElementById("upd-date").valueAsDate = new Date(date);
+          document.getElementById("upd-player").value = player_id;
+          document.getElementById("upd-club").value = club_id;
+          document.getElementById("upd-hole").value = hole_number;
+          document.getElementById("upd-score").value = hole_score;
+        }
+      }
+    }
   </script>
 </head>
 <body onload="browseScores()">
@@ -88,7 +111,13 @@ Add, edit, or remove a hole score.<br>
         </thead>
         <tbody>
         {{#each data}}
-        <tr data-i={{this.hole_scores_id}}>
+        <tr data-i={{this.hole_scores_id}} 
+        data-d="{{this.date}}"
+        data-p={{this.player_id}}
+        data-c={{this.club_id}}
+        data-h={{this.hole_number}}
+        data-s={{this.score}}
+        >
             <td>{{this.hole_scores_id}}</td>
             <td>{{formatDate this.date}}</td>
             <td>{{this.player_id}}</td>
@@ -97,7 +126,7 @@ Add, edit, or remove a hole score.<br>
             <td>{{this.club_name}}</td>
             <td>{{this.hole_number}}</td>
             <td>{{this.score}}</td>
-            <td><button type="button" onclick = 'updateScore()'>EDIT</button></td>
+            <td><button type="button" onclick = 'updateScore(); populate({{this.hole_scores_id}});'>EDIT</button></td>
             <td><button type="button" onclick = 'deleteScore({{this.hole_scores_id}})'>DELETE</button></td>
         </tr>
         </tbody>
@@ -155,14 +184,29 @@ Add, edit, or remove a hole score.<br>
                 <th>score</th>
             </tr>
             <tr>
-                <td><input type="date" name="date" value = "2022-04-28"></td>
-                <td><input type="number" name="player_id" value="1"></td>
-                <td><input type="number" name="club_id" value="2"></td>
-                <td><input type="number" name="hole_number" value="1"></td>
-                <td><input type="number" name="score" value="3"></td>
+                <td><label id="upd-hsi"></label></td>
+                <td><input type="date" id="upd-date"></td>
+                <td>
+                  <select name="upd-player" id="upd-player">
+                    <option value="test">Select a Person</option>
+                    {{#each players}}
+                    <option value="{{this.player_id}}">{{this.name}}</option>
+                    {{/each}}
+                  </select>
+                </td>
+                <td>
+                    <select name="upd-club" id="upd-club">
+                    <option value="test">Select a Club</option>
+                    {{#each clubs}}
+                    <option value="{{this.club_id}}">{{this.name}}</option>
+                    {{/each}}
+                  </select>
+                </td>
+                <td><input type="number" id="upd-hole"></td>
+                <td><input type="number" id="upd-score"></td>
             </tr>
         </table>
-        <input class="btn" type="submit" value="update score">
+        <input type="submit" value="update score">
     </form>
   </div><!-- insert -->
 </body>
