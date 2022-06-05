@@ -50,7 +50,7 @@
           let club_id = holeScore.getAttribute("data-c");
           let hole_number = holeScore.getAttribute("data-h");
           let hole_score = holeScore.getAttribute("data-s");
-          document.getElementById("upd-hsi").value = hole_score_id;
+          document.getElementById("upd-hsi").innerHTML = hole_score_id;
           document.getElementById("upd-date").valueAsDate = new Date(date);
           document.getElementById("upd-player").value = player_id;
           document.getElementById("upd-club").value = club_id;
@@ -171,12 +171,13 @@ Add, edit, or remove a hole score.<br>
         <input type="submit" value="add score">
     </form>
   </div>
-  <script src="./js/add_hole_score.js"></script><!-- insert -->
+  <script src="./js/add_hole_score.js"></script>
   <p>&nbsp;</p>
   <div id="update">
     <form id="updatescore">
         <table border="1" cellpadding="5">
             <tr>
+                <th>hole_score_id</th>
                 <th>date</th>
                 <th>player_id</th>
                 <th>club_id</th>
@@ -207,6 +208,7 @@ Add, edit, or remove a hole score.<br>
             </tr>
         </table>
         <input type="submit" value="update score">
+  <script src="./js/update_hole_score.js"></script>
     </form>
   </div><!-- insert -->
 </body>

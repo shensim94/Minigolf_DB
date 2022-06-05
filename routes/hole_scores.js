@@ -119,15 +119,22 @@ app.put('/updateholescore', function(req,res)
     let score = parseInt(data.score);
     if(!hole_scores_id || !date || !player || !club || !hole || !score)
     {
+        console.log("error with update fields:")
+        console.log(hole_scores_id);
+        console.log(date);
+        console.log(player);
+        console.log(club);
+        console.log(hole);
+        console.log(score);
         res.sendStatus(400);
         return;
     }
 
     let query = `UPDATE hole_scores SET 
-    date = "${date}"
-    player_id = ${player}
-    club_id = ${club}
-    hole_number = ${hole_number}
+    date = "${date}",
+    player_id = ${player},
+    club_id = ${club},
+    hole_number = ${hole},
     score = ${score} WHERE hole_scores_id = ${hole_scores_id};`;
     db.pool.query(query, function(error, rows)
     {

@@ -22,7 +22,7 @@ updatePersonForm.addEventListener("submit", function (e) {
 
     // Put our data we want to send in a javascript object
     let data = {
-        id : hsID.value,
+        id : hsID.innerHTML,
         date: inputDate.value,
         player: inputPlayer.value,
         club: inputClub.value,
