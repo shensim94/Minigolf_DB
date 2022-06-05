@@ -116,8 +116,26 @@ app.post('/add_hole', function(req, res){
 
 function refresh(req, res)
 {
+    let query1;
+    if(!req.query.club_name && !req.query.hole_number && !req.query.par_score){
+        query1 = `SELECT clubs.name, holes.club_id, holes.hole_number, holes.par_score, holes.description from holes INNER JOIN clubs on clubs.club_id = holes.club_id;`; 
+    }
+    else{
+        query1 = `SELECT clubs.name, holes.club_id, holes.hole_number, holes.par_score, holes.description from holes INNER JOIN clubs on clubs.club_id = holes.club_id WHERE TRUE`; 
+        if(req.query.club_name){
+            query1 = query1 + ` AND name LIKE '%${req.query.club_name}%'`
+        }
+        if(req.query.hole_number){
+            query1 = query1 + ` AND hole_number = ${req.query.hole_number}`
+        }
+        if(req.query.par_score){
+            query1 = query1 + ` AND par_score = ${req.query.par_score}`
+        }
+        query1 = query1 + ';'
+    }
     //join query for club_members
-    let query1 = "SELECT clubs.name, holes.club_id, holes.hole_number, holes.par_score, holes.description from holes INNER JOIN clubs on clubs.club_id = holes.club_id;"; 
+    console.log(req.query);
+
     db.pool.query(query1, function(error, rows, fields){
         // If there was an error on the second query, send a 400
         if (error) {
