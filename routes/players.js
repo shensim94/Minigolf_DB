@@ -6,7 +6,29 @@ exports.router = app;
 /* new routes for players entity */
 app.get('/', function(req, res)
     {  
-        let query1 = "SELECT * FROM players;";               // Define our query
+        let query1;
+        if(!req.query.name && !req.query.address && !req.query.zip && !req.query.city && !req.query.state){
+            query1 = `SELECT * FROM players`; 
+        }
+        else{
+            query1 = `SELECT * FROM players WHERE TRUE`; 
+            if(req.query.name){
+                query1 = query1 + ` AND name LIKE '%${req.query.name}%'`
+            }
+            if(req.query.address){
+                query1 = query1 + ` AND address LIKE '%${req.query.address}%'`
+            }
+            if(req.query.zip){
+                query1 = query1 + ` AND zip_code = ${req.query.zip}`
+            }
+            if(req.query.city){
+                query1 = query1 + ` AND city LIKE '%${req.query.city}%'`
+            }
+            if(req.query.state){
+                query1 = query1 + ` AND state LIKE = '%${req.query.state}%'`
+            }
+            query1 = query1 + ';'
+        }
 
         db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
@@ -17,11 +39,7 @@ app.get('/', function(req, res)
 app.post('/add_player', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
-    if(!data.name)
-    {
-        res.sendStatus(400);
-        return;
-    }
+
     // Capture NULL values
     let zip = parseInt(data.zip);
     if (isNaN(zip))
