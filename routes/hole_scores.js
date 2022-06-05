@@ -24,7 +24,31 @@ app.get('/', function(req,res)
         }
         else
         {
-            res.render('hole_scores', {data: rows});
+            //to get a list of all players
+            let query2 = "SELECT player_id, name FROM players;";
+            db.pool.query(query2, function (error, players, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                else {
+                    let query3 = "SELECT club_id, name FROM clubs"
+                    db.pool.query(query3, function(error, clubs, fields){
+        
+                        // If there was an error on the second query, send a 400
+                        if (error) {
+        
+                            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                            console.log(error);
+                            res.sendStatus(400);
+                        }
+                        else
+                        {
+                            res.render('hole_scores', { data: rows, players: players, clubs:clubs });
+                        }
+                    })
+                }
+            })
         }
     })  
 })
@@ -45,3 +69,49 @@ app.delete('/deleteholescore', function(req, res)
         }
     })
 })
+
+app.post('/addholescore', function(req,res)
+{
+    let data = req.body;
+    let date = data.date;
+    let player_id = parseInt(data.player_id);
+    let club_id = parseInt(data.club_id);
+    let hole_number = parseInt(data.hole_number);
+    let score = parseInt(data.score);
+    if(!date || !player_id || !club_id || !hole_number || !score)
+    {
+        res.sendStatus(400);
+        return;
+    }
+
+    //maybe check that hole exists first?
+
+    //insert query
+    let query = `INSERT INTO hole_scores (date, player_id, club_id, hole_number, score)
+    VALUES (
+        "${date}",
+        ${player_id},
+        ${club_id},
+        ${hole_number},
+        ${score}
+    )`;
+    db.pool.query(query, function(error, rows, fields)
+    {
+        if(error){
+            console.log(error)
+            res.sendStatus(400)
+        }
+        else
+        {
+            res.send(rows);
+        }
+    })
+})
+
+// app.put('/updateholescore', function(req,res)
+// {
+//     let data = req.body;
+//     let hole_scores_id = parseInt(data.id);
+//     let 
+//     let query = `UPDATE hole_scores SET `
+// })

@@ -4,38 +4,33 @@
 <script language="JavaScript">
     function showform(dowhat) {
       /*
-      * four DIVS: browse, insert, update, delete
+      * four DIVS: browse, insert, update
       * this function sets one visible the others not
       */
       if (dowhat == 'insert') {
         document.getElementById('browse').style.display = 'block';
         document.getElementById('insert').style.display = 'block';
         document.getElementById('update').style.display = 'none';
-        document.getElementById('delete').style.display = 'none';
       }
       else if (dowhat == 'update') {
         document.getElementById('browse').style.display = 'block';
         document.getElementById('insert').style.display = 'none';
         document.getElementById('update').style.display = 'block';
-        document.getElementById('delete').style.display = 'none';
       }
       else if (dowhat == 'delete') {
         document.getElementById('browse').style.display = 'block';
         document.getElementById('insert').style.display = 'none';
         document.getElementById('update').style.display = 'none';
-        document.getElementById('delete').style.display = 'block';
       }
       else if (dowhat == 'all') {
         document.getElementById('browse').style.display = 'block';
         document.getElementById('insert').style.display = 'block';
         document.getElementById('update').style.display = 'block';
-        document.getElementById('delete').style.display = 'block';
       }
       else { //by default display browse
         document.getElementById('browse').style.display = 'block';
         document.getElementById('insert').style.display = 'none';
         document.getElementById('update').style.display = 'none';
-        document.getElementById('delete').style.display = 'none';
       }
     }
     function newScore() { showform('insert'); }
@@ -113,29 +108,44 @@ Add, edit, or remove a hole score.<br>
 </div>
 <p>&nbsp;</p>
 <div id="insert">
-    <form method="POST" id="addscore">
+    <form id="addscore">
         <table border="1" cellpadding="5">
             <tr>
-                <th>date</th>
+                <th>Date</th>
                 <th>player_id</th>
                 <th>club_id</th>
                 <th>hole_number</th>
                 <th>score</th>
             </tr>
             <tr>
-                <td><input type="date" name="date"></td>
-                <td><input type="number" name="player_id"></td>
-                <td><input type="number" name="club_id"></td>
-                <td><input type="number" name="hole_number"></td>
-                <td><input type="number" name="score"></td>
+                <td><input type="date" name="input-date" id="input-date"></td>
+                <td>
+                  <select name="input-player" id="input-player">
+                    <option value="test">Select a Person</option>
+                    {{#each players}}
+                    <option value="{{this.player_id}}">{{this.name}}</option>
+                    {{/each}}
+                  </select>
+                </td>
+                <td>
+                  <select name="input-club" id="input-club">
+                    <option value="test">Select a Club</option>
+                    {{#each clubs}}
+                    <option value="{{this.club_id}}">{{this.name}}</option>
+                    {{/each}}
+                  </select>
+                </td>
+                <td><input type="number" id="input-hole"></td>
+                <td><input type="number" id="input-score"></td>
             </tr>
         </table>
-        <input class="btn" type="submit" value="add score">
+        <input type="submit" value="add score">
     </form>
-  </div><!-- insert -->
+  </div>
+  <script src="./js/add_hole_score.js"></script><!-- insert -->
   <p>&nbsp;</p>
   <div id="update">
-    <form method="POST" id="updatescore">
+    <form id="updatescore">
         <table border="1" cellpadding="5">
             <tr>
                 <th>date</th>
