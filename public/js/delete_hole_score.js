@@ -1,4 +1,7 @@
 function deleteScore(hole_score_id) {
+    if(!confirm(`Are you sure you want to delete hole score ${hole_score_id}?`))
+        return;
+
     let link = 'hole_scores/deleteholescore';
     let data = {
         id: hole_score_id

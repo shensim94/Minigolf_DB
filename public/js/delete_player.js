@@ -4,6 +4,8 @@
 // https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
 
 function deletePlayer(player_id) {
+    if(!confirm(`Are you sure you want to delete player ${player_id}?`))
+        return;
     // Put our data we want to send in a javascript object
     let data = {
         id: player_id

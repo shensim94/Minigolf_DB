@@ -44,6 +44,11 @@ addClubForm.addEventListener("submit", function (e) {
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
+            alert(`Sorry, that hole either:
+            \n-Already Exists
+            \n-Does not have a hole_number between 1 and 18
+            \n-Does not have a par score.
+            \n-Does not have a club selected.`);
         }
     }
 

@@ -4,6 +4,9 @@
 // https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
 
 function deleteHole(club_id, hole_number) {
+    if(!confirm(`Are you sure you want to delete hole (${club_id}, ${hole_number})?`))
+        return;
+
     // Put our data we want to send in a javascript object
     let data = {
         id: club_id,

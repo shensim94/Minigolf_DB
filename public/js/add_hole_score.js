@@ -51,6 +51,7 @@ addHoleForm.addEventListener("submit", function (e) {
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
+            alert("Hole score could not be added, please check that this hole number exists at this club.");
         }
     }
 
@@ -58,8 +59,3 @@ addHoleForm.addEventListener("submit", function (e) {
     xhttp.send(JSON.stringify(data));
 
 })
-
-// addHoleForm.getElementById("input-date").addEventListener("change", function() {
-//     var input = this.value;
-//     dateValue = new Date(input);
-// });

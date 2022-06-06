@@ -85,9 +85,8 @@ app.post('/add_hole', function(req, res){
 
         // Check to see if there was an error
         if (error) {
-
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-            console.log(error)
+            console.log(error);
             res.sendStatus(400);
         }
         else
@@ -118,6 +117,7 @@ function refresh(req, res)
 {
     let query1;
     if(!req.query.club_name && !req.query.hole_number && !req.query.par_score){
+        //Default Join Query for club members
         query1 = `SELECT clubs.name, holes.club_id, holes.hole_number, holes.par_score, holes.description from holes INNER JOIN clubs on clubs.club_id = holes.club_id;`; 
     }
     else{
@@ -133,8 +133,7 @@ function refresh(req, res)
         }
         query1 = query1 + ';'
     }
-    //join query for club_members
-    console.log(req.query);
+    //console.log(req.query);
 
     db.pool.query(query1, function(error, rows, fields){
         // If there was an error on the second query, send a 400

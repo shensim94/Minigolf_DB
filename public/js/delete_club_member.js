@@ -4,7 +4,11 @@
 //Adapted From: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%207%20-%20Dynamically%20Deleting%20Data
 
 
-function deletePerson(player_id, club_id) {
+function deleteClubMember(player_id, club_id) {
+
+    if(!confirm(`Are you sure you want to delete membership ${player_id}, ${club_id}?`))
+        return;
+
     let link = 'club_members/delete-club-member';
     let data = {
         id: player_id,
