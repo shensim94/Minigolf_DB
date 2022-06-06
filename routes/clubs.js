@@ -58,6 +58,7 @@ router.post('/addclub', function(req, res)
 
 router.put('/updateclub', function(req,res)
 {
+    
     let data = req.body;
     if(!data.id || !data.name || !data.address || !data.zip || !data.state || !data.city)
     {
@@ -118,13 +119,40 @@ router.delete('/deleteclub', function(req, res)
 
 router.get('/', function(req,res)
 {
-    let query = `SELECT * FROM clubs ORDER BY club_id ASC;`
+    //default query
+    let query = null;
+    //items from search form
+    let searchItems = req.query;
+
+    //if statements to handle searches
+    if(!searchItems.club_name && !searchItems.address && !searchItems.zip && !searchItems.city && !searchItems.state)
+    {
+        query = `SELECT * FROM clubs ORDER BY club_id ASC;`;
+    }
+    else{
+        query = `SELECT * FROM clubs WHERE TRUE`
+
+        if (searchItems.club_name)
+            query = query + ` AND name LIKE '%${searchItems.club_name}%'`;
+        if (searchItems.address)
+            query = query + ` AND address LIKE '%${searchItems.address}%'`;
+        if (searchItems.zip)
+            query = query + ` AND zip_code = ${searchItems.zip_code}`;
+        if (searchItems.city)
+            query = query + ` AND city LIKE '%${searchItems.city}%'`;
+        if (searchItems.state)
+            query = query + ` AND state LIKE '%${searchItems.state}%'`;
+        
+        query = query + `;`
+    }
+
+
     db.pool.query(query, function(error, rows, fields)
     {
         if(error)
         {
             console.log(error)
-            res.sendStatus()
+            res.sendStatus(400)
         }
         else
         {

@@ -71,29 +71,29 @@
     Add, remove, or edit a club.<br>
 </br>
     <div id="search club">
-        <form method="GET" id="search club">
+        <form method="GET" action="/clubs" id="search club">
           <legend><strong>Search for a club</strong></legend>
           <fieldset class="fields">
               <table>
                   <tr>
                       <td><label> name</label></td>
-                      <td><input type="text"></td>
+                      <td><input type="text" name="club_name"></td>
                   </tr>
                   <tr>
                     <td><label> address</label></td>
-                    <td><input type="text"></td>
+                    <td><input type="text" name="address"></td>
                 </tr>
                 <tr>
                     <td><label> zip_code</label></td>
-                    <td><input type="text"></td>
+                    <td><input type="text" name="zip"></td>
                 </tr>
                 <tr>
                     <td><label> city</label></td>
-                    <td><input type="text"></td>
+                    <td><input type="text" name="city"></td>
                 </tr>
                 <tr>
                     <td><label> state</label></td>
-                    <td><input type="text"></td>
+                    <td><input type="text" name="state"></td>
                 </tr>
               </table>
           </fieldset>
