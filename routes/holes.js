@@ -117,7 +117,7 @@ function refresh(req, res)
 {
     let query1;
     if(!req.query.club_name && !req.query.hole_number && !req.query.par_score){
-        //Default Join Query for club members
+        //Default Join Query for club names
         query1 = `SELECT clubs.name, holes.club_id, holes.hole_number, holes.par_score, holes.description from holes INNER JOIN clubs on clubs.club_id = holes.club_id;`; 
     }
     else{

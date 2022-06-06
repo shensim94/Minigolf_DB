@@ -43,6 +43,7 @@
                 let isClub = table.rows[i].getAttribute("data-i") == club_id;
                 if(isClub)
                 {
+                    //if this is the correct row, grab the row attributes and fill the update fields with the correct values.
                     let club = table.rows[i];
                     let name = club.getAttribute("data-n");
                     let desc = club.getAttribute("data-d");

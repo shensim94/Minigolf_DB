@@ -45,6 +45,7 @@
         let isScore = table.rows[i].getAttribute("data-i") == hole_score_id;
         if(isScore)
         {
+          //if this is the correct row, grab the row attributes and fill the update fields with the correct values.
           let holeScore = table.rows[i];
           let date = holeScore.getAttribute("data-d");
           let player_id = holeScore.getAttribute("data-p");

@@ -52,6 +52,7 @@
                 console.log("populate!");
                 if(isPlayer)
                 {
+                  //if this is the correct row, grab the row attributes and fill the update fields with the correct values.
                     let player = table.rows[i];
                     let name = player.getAttribute("data_name");
                     let address = player.getAttribute("data_add");

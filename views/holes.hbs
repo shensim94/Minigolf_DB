@@ -45,6 +45,7 @@
                 let isHole = table.rows[i].getAttribute("data_hn") == hole_number;
                 if(isClub && isHole)
                 {
+                  //if this is the correct row, grab the row attributes and fill the update fields with the correct values.
                     let hole = table.rows[i];
                     let par_score = hole.getAttribute("data_ps");
                     let desc = hole.getAttribute("data_desc");
