@@ -102,9 +102,6 @@ VALUES
 --should only delete a single membership.
 DELETE from club_members WHERE player_id = :player_id_from_select AND club_id= :club_id_from_select;
 
---Update a club-membership (incase of a mis-select)
-UPDATE club_members SET club_id = :new_club_id WHERE club_id = :old_club_id AND player_id = :person_from_select};
-
 --Insert hole_scores
 INSERT INTO hole_scores
 (
