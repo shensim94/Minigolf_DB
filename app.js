@@ -28,6 +28,7 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
 //Citation for following function
 //Date: 6/2/2022
 //Copied from Group 105 (Christopher Tu and Mario Lopez) in their app.js
+//https://edstem.org/us/courses/21099/discussion/1547315
 const hbs = exphbs.create({
     extname: ".hbs",
     helpers: {
