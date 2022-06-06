@@ -62,32 +62,32 @@ app.delete('/delete-club-member', function (req, res, next) {
     })
 });
 
-app.put('/update-club-member', function(req,res,next)
-{
-    let data = req.body;
-    let person = parseInt(data.name);
-    let originID = parseInt(data.originID);
-    let newID = parseInt(data.newID);
-    if(!person || !originID || !newID)
-    {
-        res.sendStatus(400);
-        return;
-    }
+// app.put('/update-club-member', function(req,res,next)
+// {
+//     let data = req.body;
+//     let person = parseInt(data.name);
+//     let originID = parseInt(data.originID);
+//     let newID = parseInt(data.newID);
+//     if(!person || !originID || !newID)
+//     {
+//         res.sendStatus(400);
+//         return;
+//     }
 
-    //update where
-    let query = `UPDATE club_members SET club_id = ${newID} WHERE club_id = ${originID} AND player_id = ${person};`
-    db.pool.query(query, function(error, fields){
-        if(error)
-        {
-            console.log(error);
-            res.sendStatus(400);
-        }
-        else
-        {
-            res.sendStatus(200);
-        }
-    })
-});
+//     //update where
+//     let query = `UPDATE club_members SET club_id = ${newID} WHERE club_id = ${originID} AND player_id = ${person};`
+//     db.pool.query(query, function(error, fields){
+//         if(error)
+//         {
+//             console.log(error);
+//             res.sendStatus(400);
+//         }
+//         else
+//         {
+//             res.sendStatus(200);
+//         }
+//     })
+// });
 
 app.get('/', function (req, res) {
     refresh(req, res);    
