@@ -2,7 +2,7 @@
 
 <head>
   <title>MiniGolf Fanatics</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="../css/style.css" rel="stylesheet">
   <script language="JavaScript">
     function showform(dowhat) {
       /*
@@ -72,13 +72,13 @@
 </head>
 
 <body onload="browsePlayers()">
-  [ <a href="players">Players</a> | <a href="clubs">Clubs</a> | <a href="holes">Holes</a> | 
-    <a href="hole_scores">Hole Scores</a> | <a href="/club_members">Club Members</a>]
+  <nav><a href="players">Players</a> | <a href="clubs">Clubs</a> | <a href="holes">Holes</a> | 
+    <a href="hole_scores">Hole Scores</a> | <a href="/club_members">Club Members</a></nav>
   <h1>Players</h1>
   Add, Edit, or Delete Players.<br>
 </br>
-<div id="search player">
-  <form method="GET" action='/players'>
+<div id="search player" class="search">
+  <form method="GET" action='/players' class="search_form">
     <legend><strong>Search for a player</strong></legend>
     <fieldset class="fields">
       <table>
@@ -109,8 +109,8 @@
   </form>
 </div><!-- insert -->
 
-  <div id="browse">
-    <table id = "players_table" border="1" cellpadding="5">
+  <div id="browse" class="content">
+    <table id = "players_table" border="1" cellpadding="5" class="content_table">
 
     {{!-- Header section --}}
     <thead>
@@ -140,14 +140,13 @@
             <td>{{this.city}}</td>
             <td>{{this.state}}</td>
             <td><button type="button" onclick="updatePlayer(); populate({{this.player_id}});">EDIT</button></td>
-            <td><button onclick="deletePlayer({{this.player_id}})">Delete</button></td>
+            <td><button onclick="deletePlayer({{this.player_id}})">DELETE</button></td>
         </tr>
         {{/each}}
     </tbody>
 <script src="./js/delete_player.js"></script>
 </table>
     <button type="button" onclick="newPlayer()">ADD</button>
-    <p>&nbsp;</p>
   </div> <!-- browse -->
   <div id="insert">
     <form id="add_player">
@@ -172,7 +171,6 @@
     </form>
   <script src="./js/add_player.js"></script>
   </div><!-- insert -->
-  <p>&nbsp;</p>
 
   <div id="update">
     <form id="update_player">
@@ -201,5 +199,5 @@
   </div><!-- insert -->
 
 </body>
-
+<footer>&copy;2022 Simon Shen, Allan Hillyer</footer>
 </html>

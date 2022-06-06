@@ -1,5 +1,6 @@
 <head>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link href="../css/style.css" rel="stylesheet">
     <script language="JavaScript">
         function showform(dowhat) {
           /*
@@ -64,14 +65,12 @@
 </head>
 
 <body onload="browseClubs()">
-    [ <a href="/players">Players</a> | <a href="/clubs">Clubs</a> | <a href="/holes">Holes</a> | <a
-        href="/hole_scores">Hole Scores</a> | <a href="/club_members">Club Members</a>]
-    <p>&nbsp;</p>
+<nav><a href="players">Players</a> | <a href="clubs">Clubs</a> | <a href="holes">Holes</a> | <a href="hole_scores">Hole Scores</a> | <a href="club_members">Club Members</a></nav>
     <h1>Clubs</h1>
     Add, remove, or edit a club.<br>
 </br>
-    <div id="search club">
-        <form method="GET" action="/clubs" id="search club">
+    <div id="search club" class="search">
+        <form method="GET" action="/clubs" id="search club" class="search_form">
           <legend><strong>Search for a club</strong></legend>
           <fieldset class="fields">
               <table>
@@ -100,7 +99,7 @@
           <input class="btn" type="submit" id="search club" value="search club">
         </form>
       </div>
-    <div id="browse">
+    <div id="browse" class="content">
         <table id = "clubs_table" border="1" cellpadding="5">
             <thead>
                 <tr>
@@ -133,7 +132,6 @@
     </div>
     <script src="./js/delete_club.js"></script>
 
-    <p>&nbsp;</p>
     <div id="insert">
         <form id="addclub">
             <table border="1" cellpadding="5">
@@ -159,7 +157,6 @@
     </div>
     <script src="./js/add_club.js"></script>
 
-    <p>&nbsp;</p>
     <div id="update">
         <form id="update_club">
             <table border="1" cellpadding="5">
@@ -187,3 +184,4 @@
     </div>
     <script src="./js/update_club.js"></script>
 </body>
+<footer>&copy;2022 Simon Shen, Allan Hillyer</footer>

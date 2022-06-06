@@ -1,6 +1,7 @@
 <head>
 <title>MiniGolf Fanatics</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<link href="../css/style.css" rel="stylesheet">
 <script language="JavaScript">
     function showform(dowhat) {
       /*
@@ -62,14 +63,12 @@
   </script>
 </head>
 <body onload="browseScores()">
-    [ <a href="/players">Players</a> | <a href="/clubs">Clubs</a> | <a href="/holes">Holes</a> | <a
-        href="/hole_scores">Hole Scores</a> | <a href="/club_members">Club Members</a>]
-<p>&nbsp;</p>
+<nav><a href="players">Players</a> | <a href="clubs">Clubs</a> | <a href="holes">Holes</a> | <a href="hole_scores">Hole Scores</a> | <a href="club_members">Club Members</a></nav>
 <h1>Hole Scores</h1>
 Add, edit, or remove a hole score.<br>
 </br>
-<div id="search score">
-  <form method="GET" id="search score">
+<div id="search score" class="search">
+  <form method="GET" id="search score" class="search_form">
     <legend><strong>lookup scores</strong></legend>
     <fieldset class="fields">
       <table>
@@ -112,7 +111,7 @@ Add, edit, or remove a hole score.<br>
     <input class="btn" type="submit" id="search score" value="search score">
   </form>
 </div><!-- insert -->
-<div id="browse">
+<div id="browse" class="content">
     <table id = "hole_scores_table" border="1" cellpadding="5">
         <thead>
             <tr>
@@ -149,7 +148,7 @@ Add, edit, or remove a hole score.<br>
     <script src="./js/delete_hole_score.js"></script>
     <button type="button" onclick="newScore()">ADD</button>
 </div>
-<p>&nbsp;</p>
+
 <div id="insert">
     <form id="addscore">
         <table border="1" cellpadding="5">
@@ -186,7 +185,7 @@ Add, edit, or remove a hole score.<br>
     </form>
   </div>
   <script src="./js/add_hole_score.js"></script>
-  <p>&nbsp;</p>
+  
   <div id="update">
     <form id="updatescore">
         <table border="1" cellpadding="5">
@@ -226,3 +225,4 @@ Add, edit, or remove a hole score.<br>
     </form>
   </div><!-- insert -->
 </body>
+<footer>&copy;2022 Simon Shen, Allan Hillyer</footer>

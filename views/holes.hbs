@@ -1,4 +1,5 @@
 <head>
+  <link href="../css/style.css" rel="stylesheet">
 <title>MiniGolf Fanatics</title>
 <script language="JavaScript">
     function showform(dowhat) {
@@ -59,13 +60,12 @@
 </head>
 <body onload = "browseHoles()">
 
-[ <a href="players">Players</a> | <a href="clubs">Clubs</a> | <a href="holes">Holes</a> | <a href="hole_scores">Hole Scores</a> | <a href="club_members">Club Members</a>]
-<p>&nbsp;</p>
+<nav><a href="players">Players</a> | <a href="clubs">Clubs</a> | <a href="holes">Holes</a> | <a href="hole_scores">Hole Scores</a> | <a href="club_members">Club Members</a></nav>
 <h1>Holes</h1>
 Add, edit, or remove a hole.<br>
 </br>
-<div id="search hole">
-  <form method="GET" action='/holes' id="search hole">
+<div id="search hole" class="search">
+  <form method="GET" action='/holes' id="search hole" class="search_form">
     <legend><strong>Lookup holes</strong></legend>
     <fieldset class="fields">
       <table>
@@ -86,8 +86,8 @@ Add, edit, or remove a hole.<br>
     </fieldset>
     <input class="btn" type="submit" id="search hole" value="search hole">
   </form>
-<div id="browse">
-   <table id = "holes_table" border="1" cellpadding="5">
+<div id="browse" class="content">
+   <table id = "holes_table" border="1" cellpadding="5" class="content_table">
 
     {{!-- Header section --}}
     <thead>
@@ -123,8 +123,6 @@ Add, edit, or remove a hole.<br>
 </table>
     <button type="button" onclick="newHole()">ADD</button>
 </div>
-
-<p>&nbsp;</p>
 <div id="insert">
     <form id="add_hole">
         <table border="1" cellpadding="5">
@@ -149,7 +147,6 @@ Add, edit, or remove a hole.<br>
     </form>
     <script src="./js/add_hole.js"></script>
   </div><!-- insert -->
-  <p>&nbsp;</p>
   <div id="update">
     <form id="update_hole">
         <table border="1" cellpadding="5">
@@ -171,3 +168,4 @@ Add, edit, or remove a hole.<br>
     <script src="./js/update_hole.js"></script>
   </div><!-- insert -->
 </body>
+<footer>&copy;2022 Simon Shen, Allan Hillyer</footer>
