@@ -37,7 +37,7 @@ function deleteRow(player_id){
     for (let i = 0, row; row = table.rows[i]; i++) {
        //iterate through rows
        //rows would be accessed using the "row" variable assigned in the for loop
-       if (table.rows[i].getAttribute("data-value") == player_id) {
+       if (table.rows[i].getAttribute("data_pid") == player_id) {
             table.deleteRow(i);
             break;
        }
