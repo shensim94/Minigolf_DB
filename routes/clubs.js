@@ -137,7 +137,7 @@ router.get('/', function(req,res)
         if (searchItems.address)
             query = query + ` AND address LIKE '%${searchItems.address}%'`;
         if (searchItems.zip)
-            query = query + ` AND zip_code = ${searchItems.zip_code}`;
+            query = query + ` AND zip_code = ${searchItems.zip}`;
         if (searchItems.city)
             query = query + ` AND city LIKE '%${searchItems.city}%'`;
         if (searchItems.state)
@@ -146,13 +146,12 @@ router.get('/', function(req,res)
         query = query + `;`
     }
 
-
     db.pool.query(query, function(error, rows, fields)
     {
         if(error)
         {
             console.log(error)
-            res.sendStatus(400)
+            res.sendStatus(400);
         }
         else
         {

@@ -74,24 +74,38 @@ Add, edit, or remove a hole score.<br>
     <fieldset class="fields">
       <table>
         <tr>
-            <td><label> date</label></td>
-            <td><input type="date"></td>
+            <td><label>date</label></td>
+            <td><input type="date" name="date"></td>
         </tr>
         <tr>
           <td><label> player id</label></td>
-          <td><input type="number"></td>
+          <td>
+            <select name="player_id">
+              <option>Select a Person</option>
+              {{#each players}}
+              <option value="{{this.player_id}}">{{this.name}}</option>
+              {{/each}}
+            </select>
+          </td>
       </tr>
       <tr>
           <td><label> club id</label></td>
-          <td><input type="number"></td>
+          <td>
+            <select name="club_id">
+            <option>Select a Club</option>
+            {{#each clubs}}
+            <option value="{{this.club_id}}">{{this.name}}</option>
+            {{/each}}
+            </select>
+          </td>
       </tr>
       <tr>
           <td><label>hole number</label></td>
-          <td><input type="number"></td>
+          <td><input type="number" name="hole_number"></td>
       </tr>
       <tr>
           <td><label> score</label></td>
-          <td><input type="number"></td>
+          <td><input type="number" name="score"></td>
       </tr>
     </table>
     </fieldset>
