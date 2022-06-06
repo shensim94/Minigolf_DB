@@ -145,6 +145,7 @@ router.get('/', function(req,res)
         
         query = query + `;`
     }
+    console.log(query);
 
     db.pool.query(query, function(error, rows, fields)
     {

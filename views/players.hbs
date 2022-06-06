@@ -58,6 +58,8 @@
                     let zip = player.getAttribute("data_zip");
                     let city = player.getAttribute("data_city");
                     let state = player.getAttribute("data_state");
+                    let club = player.getAttribute("data-f");
+                    document.getElementById('upd_club_id').value = club;
                     document.getElementById('upd_pid').innerHTML = player_id;
                     document.getElementById('upd_name').value = name;
                     document.getElementById('upd_address').value = address;
@@ -131,10 +133,12 @@
 
         {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
         {{#each data}}
-        <tr data_pid={{this.player_id}} data_name="{{this.name}}" data_add="{{this.address}}"
+        <tr data_pid={{this.player_id}} data_name="{{this.name}}" data-f="{{this.favorite_course}}" data_add="{{this.address}}"
          data_zip={{this.zip_code}} data_city="{{this.city}}" data_state="{{this.state}}">
             <td>{{this.player_id}}</td>
             <td>{{this.name}}</td>
+            <td>{{this.favorite_club}}</td>
+            <td>{{this.favorite_club_name}}</td>
             <td>{{this.address}}</td>
             <td>{{this.zip_code}}</td>
             <td>{{this.city}}</td>
@@ -153,6 +157,7 @@
       <table border="1" cellpadding="5">
             <tr>
                 <th>name</th>
+                <th>favorite_course</th>
                 <th>address</th>
                 <th>zip_code</th>
                 <th>city</th>
@@ -160,6 +165,14 @@
             </tr>
             <tr>
                 <td><input id="input-name" type="text" name="name"></td>
+                <td>
+                <select name="input_club_id" id="input_club_id">
+                <option value="test">Select a Club</option>
+                {{#each clubs}}
+                <option value="{{this.club_id}}">{{this.name}}</option>
+                {{/each}}
+                </select>
+                </td>
                 <td><input id="input-address" type="text" name="address"></td>
                 <td><input id="input-zip" type="number" name="zip_code"></td>
                 <td><input id="input-city" type="text" name="city"></td>
@@ -178,6 +191,7 @@
             <tr>
                 <th>id</th>
                 <th>name</th>
+                <th>favorite_club</th>
                 <th>address</th>
                 <th>zip_code</th>
                 <th>city</th>
@@ -186,6 +200,14 @@
             <tr>
                 <td><label id="upd_pid"></label></td>
                 <td><input id="upd_name" type="text" name="name"></td>
+                <td>
+                <select name="upd_club_id" id="upd_club_id">
+                <option value="test">Select a Club</option>
+                {{#each clubs}}
+                <option value="{{this.club_id}}">{{this.name}}</option>
+                {{/each}}
+                </select>
+                </td>
                 <td><input id="upd_address" type="text" name="address"></td>
                 <td><input id="upd_zip" type="number" name="zip_code"></td>
                 <td><input id="upd_city" type="text" name="city"></td>

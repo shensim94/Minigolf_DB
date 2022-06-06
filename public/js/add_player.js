@@ -14,6 +14,7 @@ addPersonForm.addEventListener("submit", function (e) {
 
     // Get form fields we need to get data from
     let inputName = document.getElementById("input-name");
+    let inputFClub = document.getElementById("input_club_id")
     let inputAddress = document.getElementById("input-address");
     let inputZip = document.getElementById("input-zip");
     let inputCity = document.getElementById("input-city");
@@ -21,6 +22,7 @@ addPersonForm.addEventListener("submit", function (e) {
 
     // Get the values from the form fields
     let nameValue = inputName.value;
+    let clubValue = inputFClub.value;
     let addressValue = inputAddress.value;
     let zipValue = inputZip.value;
     let cityValue = inputCity.value;
@@ -29,6 +31,7 @@ addPersonForm.addEventListener("submit", function (e) {
     // Put our data we want to send in a javascript object
     let data = {
         name: nameValue,
+        fclub: clubValue,
         address: addressValue,
         zip: zipValue,
         city: cityValue,
@@ -51,6 +54,7 @@ addPersonForm.addEventListener("submit", function (e) {
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
+            alert("There was a problem with the input, please ensure that this player has a name.")
         }
     }
 

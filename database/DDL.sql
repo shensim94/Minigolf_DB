@@ -3,12 +3,14 @@ SET AUTOCOMMIT = 0;
 DROP TABLE IF EXISTS players, clubs, holes, club_members, hole_scores; 
 CREATE TABLE players(
     player_id int NOT NULL AUTO_INCREMENT,
-    name VARCHAR(45),
+    name VARCHAR(45) NOT NULL,
+    favorite_club int,
     address VARCHAR(145),
     zip_code VARCHAR(50),
     city VARCHAR(50),
     state VARCHAR(50),
-    PRIMARY KEY(player_id)
+    PRIMARY KEY(player_id),
+    FOREIGN KEY(favorite_club) REFERENCES clubs(club_id) ON DELETE CASCADE
 );
 
 CREATE TABLE clubs(

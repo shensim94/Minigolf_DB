@@ -8,33 +8,50 @@ app.get('/', function(req, res)
     {  
         let query1;
         if(!req.query.name && !req.query.address && !req.query.zip && !req.query.city && !req.query.state){
-            query1 = `SELECT * FROM players`; 
+            query1 = `SELECT players.player_id, players.name, players.favorite_club, clubs.name AS 'favorite_club_name', players.address, players.zip_code, players.city, players.state FROM players
+            LEFT JOIN clubs on clubs.club_id = players.favorite_club
+            ORDER BY player_id ASC;`; 
         }
         else{
-            query1 = `SELECT * FROM players WHERE TRUE`; 
+            query1 = `SELECT players.player_id, players.name, players.favorite_club, clubs.name AS 'favorite_club_name', players.address, players.zip_code, players.city, players.state FROM players
+            LEFT JOIN clubs on clubs.club_id = players.favorite_club WHERE TRUE`; 
             if(req.query.name){
-                query1 = query1 + ` AND name LIKE '%${req.query.name}%'`
+                query1 = query1 + ` AND players.name LIKE '%${req.query.name}%'`
             }
             if(req.query.address){
-                query1 = query1 + ` AND address LIKE '%${req.query.address}%'`
+                query1 = query1 + ` AND players.address LIKE '%${req.query.address}%'`
             }
             if(req.query.zip){
-                query1 = query1 + ` AND zip_code = ${req.query.zip}`
+                query1 = query1 + ` AND players.zip_code = ${req.query.zip}`
             }
             if(req.query.city){
-                query1 = query1 + ` AND city LIKE '%${req.query.city}%'`
+                query1 = query1 + ` AND players.city LIKE '%${req.query.city}%'`
             }
             if(req.query.state){
-                query1 = query1 + ` AND state LIKE = '%${req.query.state}%'`
+                query1 = query1 + ` AND players.state LIKE '%${req.query.state}%'`
             }
             query1 = query1 + ';'
         }
+        console.log(query1);
 
-        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+        let query2 = "SELECT club_id, name FROM clubs"
+        db.pool.query(query2, function(error, clubs, fields){
 
-            res.render('players', {data: rows});                  // Render the index.hbs file, and also send the renderer
-        })                                                      // an object where 'data' is equal to the 'rows' we
-    });                                                         // received back from the query
+            // If there was an error on the second query, send a 400
+            if (error) {
+
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error);
+                res.sendStatus(400);
+            } else
+            {
+                db.pool.query(query1, function(error, rows, fields){    // Execute the query
+                    res.render('players', {data: rows, clubs: clubs});                  // Render the index.hbs file, and also send the renderer
+                })
+            }
+        })
+
+    });
 
 app.post('/add_player', function(req, res){
     // Capture the incoming data and parse it back to a JS object
@@ -46,10 +63,13 @@ app.post('/add_player', function(req, res){
     {
         zip = 'NULL'
     }
-
+    if(isNaN(parseInt(data.fclub)))
+    {
+        data.fclub = 'NULL'
+    }
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO players(name, address, zip_code, city, state) VALUES ('${data.name}', '${data.address}', ${zip}, '${data.city}', '${data.state}');`;
+    query1 = `INSERT INTO players(name, favorite_club, address, zip_code, city, state) VALUES ('${data.name}', ${data.fclub}, '${data.address}', ${zip}, '${data.city}', '${data.state}');`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
@@ -62,7 +82,9 @@ app.post('/add_player', function(req, res){
         else
         {
             // If there was no error, perform a SELECT * on bsg_people
-            query2 = `SELECT * FROM players;`;
+            query2 = `SELECT players.player_id, players.name, players.favorite_club, clubs.name AS 'favorite_club_name', players.address, players.zip_code, players.city, players.state FROM players
+            LEFT JOIN clubs on clubs.club_id = players.favorite_club
+            ORDER BY player_id ASC;`;
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400
@@ -107,11 +129,14 @@ app.put('/update_player', function(req,res,next){
     let data = req.body;
     let id = parseInt(data.id);
     let zip = parseInt(data.zip);
+    let club = parseInt(data.fclub)
+    console.log(club)
     if (isNaN(zip))
     {
         zip = 'NULL'
     }
-    query1 = `UPDATE players SET name='${data.name}', address='${data.address}', zip_code=${zip}, city='${data.city}', state='${data.state}' WHERE player_id = ${id}`
+
+    query1 = `UPDATE players SET name='${data.name}', favorite_club=${club}, address='${data.address}', zip_code=${zip}, city='${data.city}', state='${data.state}' WHERE player_id = ${id}`
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
@@ -123,8 +148,10 @@ app.put('/update_player', function(req,res,next){
         }
         else
         {
-            // If there was no error, perform a SELECT * on bsg_people
-            query2 = `SELECT * FROM players;`;
+            // If there was no error, just requery players table.
+            query2 = `SELECT players.player_id, players.name, players.favorite_club, clubs.name AS 'favorite_club_name', players.address, players.zip_code, players.city, players.state FROM players
+            LEFT JOIN clubs on clubs.club_id = players.favorite_club
+            ORDER BY player_id ASC;`;
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400

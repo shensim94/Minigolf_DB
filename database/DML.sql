@@ -1,5 +1,7 @@
 --Query for all players
-SELECT * FROM players ORDER BY player_id ASC;
+SELECT players.player_id, players.name, players.favorite_club, clubs.name AS 'favorite_club_name', players.address, players.zip_code, players.city, players.state FROM players
+LEFT JOIN clubs on clubs.club_id = players.favorite_club
+ORDER BY player_id ASC;
 
 --Query for all club_members
 SELECT club_members.player_id AS "Player ID", players.name AS "Name", club_members.club_id AS "Course ID", clubs.name AS "Club Name" FROM club_members 
@@ -80,6 +82,7 @@ VALUES
 UPDATE players
 SET
 name=:name_input,
+favorite_club =:favorite_club_from_select,
 address=:address_input,
 zip_code=:zip_input,
 city=:city_input,
