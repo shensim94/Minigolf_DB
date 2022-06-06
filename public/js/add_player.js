@@ -45,14 +45,9 @@ addPersonForm.addEventListener("submit", function (e) {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
             // Add the new data to the table
-            addRowToTable(xhttp.response);
+            history.go(0);
 
             // Clear the input fields for another transaction
-            inputName.value = '';
-            inputAddress.value = '';
-            inputZip.value = '';
-            inputCity.value = '';
-            inputState.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
