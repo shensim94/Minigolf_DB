@@ -63,7 +63,7 @@ app.post('/add_player', function(req, res){
     {
         zip = 'NULL'
     }
-    if(isNaN(parseInt(data.fclub)))
+    if(!parseInt(data.fclub))
     {
         data.fclub = 'NULL'
     }
@@ -129,14 +129,16 @@ app.put('/update_player', function(req,res,next){
     let data = req.body;
     let id = parseInt(data.id);
     let zip = parseInt(data.zip);
-    let club = parseInt(data.fclub)
-    console.log(club)
     if (isNaN(zip))
     {
         zip = 'NULL'
     }
+    if(!parseInt(data.fclub))
+    {
+        data.fclub = 'NULL'
+    }
 
-    query1 = `UPDATE players SET name='${data.name}', favorite_club=${club}, address='${data.address}', zip_code=${zip}, city='${data.city}', state='${data.state}' WHERE player_id = ${id}`
+    query1 = `UPDATE players SET name='${data.name}', favorite_club=${data.fclub}, address='${data.address}', zip_code=${zip}, city='${data.city}', state='${data.state}' WHERE player_id = ${id}`
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error

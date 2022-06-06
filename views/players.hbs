@@ -58,7 +58,7 @@
                     let zip = player.getAttribute("data_zip");
                     let city = player.getAttribute("data_city");
                     let state = player.getAttribute("data_state");
-                    let club = player.getAttribute("data-f");
+                    let club = player.getAttribute("data-f")
                     document.getElementById('upd_club_id').value = club;
                     document.getElementById('upd_pid').innerHTML = player_id;
                     document.getElementById('upd_name').value = name;
@@ -133,8 +133,8 @@
 
         {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
         {{#each data}}
-        <tr data_pid={{this.player_id}} data_name="{{this.name}}" data-f="{{this.favorite_course}}" data_add="{{this.address}}"
-         data_zip={{this.zip_code}} data_city="{{this.city}}" data_state="{{this.state}}">
+        <tr data_pid={{this.player_id}} data_name="{{this.name}}" data_add="{{this.address}}"
+         data_zip={{this.zip_code}} data_city="{{this.city}}" data_state="{{this.state}}" data-f={{this.favorite_club}}>
             <td>{{this.player_id}}</td>
             <td>{{this.name}}</td>
             <td>{{this.favorite_club}}</td>

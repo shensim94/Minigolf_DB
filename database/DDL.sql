@@ -10,7 +10,7 @@ CREATE TABLE players(
     city VARCHAR(50),
     state VARCHAR(50),
     PRIMARY KEY(player_id),
-    FOREIGN KEY(favorite_club) REFERENCES clubs(club_id) ON DELETE CASCADE
+    FOREIGN KEY(favorite_club) REFERENCES clubs(club_id) ON DELETE SET NULL
 );
 
 CREATE TABLE clubs(
