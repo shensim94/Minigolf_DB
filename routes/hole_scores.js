@@ -5,16 +5,52 @@ exports.router = app;
 
 app.get('/', function(req,res)
 {
-    let query = `SELECT hole_scores.hole_scores_id,
-    hole_scores.date,
-    hole_scores.player_id,
-    players.name AS 'player_name',
-    hole_scores.club_id,
-    clubs.name AS 'club_name',
-    hole_scores.hole_number,
-    hole_scores.score FROM hole_scores
-    INNER JOIN players on players.player_id = hole_scores.player_id
-    INNER JOIN clubs on clubs.club_id = hole_scores.club_id;`
+    let query = null;
+
+    let searchItems = req.query;
+    if(!searchItems.date && !searchItems.player_id && !searchItems.club_id && !searchItems.hole && !searchItems.score)
+    {
+        query = `SELECT hole_scores.hole_scores_id,
+        hole_scores.date,
+        hole_scores.player_id,
+        players.name AS 'player_name',
+        hole_scores.club_id,
+        clubs.name AS 'club_name',
+        hole_scores.hole_number,
+        hole_scores.score FROM hole_scores
+        INNER JOIN players on players.player_id = hole_scores.player_id
+        INNER JOIN clubs on clubs.club_id = hole_scores.club_id;`
+    }
+    else
+    {
+        query = `SELECT hole_scores.hole_scores_id,
+        hole_scores.date,
+        hole_scores.player_id,
+        players.name AS 'player_name',
+        hole_scores.club_id,
+        clubs.name AS 'club_name',
+        hole_scores.hole_number,
+        hole_scores.score FROM hole_scores
+        INNER JOIN players on players.player_id = hole_scores.player_id
+        INNER JOIN clubs on clubs.club_id = hole_scores.club_id WHERE TRUE`
+
+        if(searchItems.date)
+            query = query + ` AND date = "${searchItems.date}"`
+        if (parseInt(searchItems.player_id)) {
+            query = query + ` AND hole_scores.player_id = ${searchItems.player_id}`
+        }
+        if(parseInt(searchItems.club_id))
+        {
+            query = query + ` AND hole_scores.club_id = ${searchItems.club_id}`
+        }
+        if(parseInt(searchItems.hole_number))
+            query = query + ` AND hole_number = ${searchItems.hole_number}`
+        if(parseInt(searchItems.score))
+            query = query + ` AND score = ${searchItems.score}`
+        query = query + `;`;
+    }
+    // console.log(query);
+
     db.pool.query(query, function(error, rows, fields)
     {
         if(error) 
